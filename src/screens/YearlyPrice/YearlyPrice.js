@@ -1,183 +1,719 @@
 import {TouchableOpacity, View, Text, TextInput} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
 import PriceInput from '../../controllers/Label/PriceInput';
 import Icon from '../../controllers/Icon/Icon';
-import {ScrollView} from 'react-native-gesture-handler';
 
-const Input = () => {
+const Input_Top = () => {
+  const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
+    colors.blue,
+    colors.blue,
+    colors.blue,
+    colors.blue,
+    colors.gray,
+    colors.gray,
+  ]);
+  const [visibilityText, setVisibilityText] = useState([
+    ':',
+    ':',
+    ':',
+    ':',
+    '',
+    '',
+  ]);
+  const [iconName, setIconName] = useState([
+    'decrease',
+    'decrease',
+    'decrease',
+    'decrease',
+    'increase',
+    '',
+  ]);
+
+  const handleLogout = i => {
+    if (visibilityBackgroundColor[i] === colors.blue) {
+      for (let index = i; index < 6; index++) {
+        if (visibilityBackgroundColor[index] === colors.gray) {
+          i = index - 1;
+          break;
+        }
+      }
+
+      let newarr = [...visibilityBackgroundColor];
+      newarr[i] = colors.gray;
+      setVisibilityBackgroundColor(newarr);
+
+      newarr = [...visibilityText];
+      newarr[i] = '';
+      setVisibilityText(newarr);
+
+      newarr = [...iconName];
+      newarr[i] = 'increase';
+      newarr[i + 1] = '';
+      setIconName(newarr);
+    } else {
+      let newarr = [...visibilityBackgroundColor];
+      newarr[i] = colors.blue;
+      setVisibilityBackgroundColor(newarr);
+
+      newarr = [...visibilityText];
+      newarr[i] = ':';
+      setVisibilityText(newarr);
+
+      newarr = [...iconName];
+      newarr[i] = 'decrease';
+      newarr[i + 1] = 'increase';
+      setIconName(newarr);
+    }
+
+    console.log(setVisibilityBackgroundColor);
+  };
+
+  useEffect(() => {
+    handleLogout();
+  }, []);
+
   return (
-    <TextInput
-      style={{
-        width: 48,
-        marginLeft: 3,
-        fontSize: 20,
-      }}
-      placeholder="0"
-    />
-  );
-};
-
-const Inputs = props => {
-  const [position, setPosition] = useState(props.Position);
-  const [topVisibility, setTopVisibility] = useState([
-    true,
-    true,
-    true,
-    true,
-    false,
-    false,
-  ]);
-  const [bottomVisibility, setBottomVisibility] = useState([
-    true,
-    true,
-    true,
-    true,
-    true,
-    false,
-  ]);
-  const [content, setContent] = useState(props.Content);
-  let fun;
-  useEffect(
-    (fun = async i => {
-      return (
-        <PriceInput
-          Position={position}
-          VisibilityBackgroundColor={
-            content === 'top'
-              ? topVisibility[i]
-                ? colors.blue
-                : colors.gray
-              : bottomVisibility[i]
-              ? colors.blue
-              : colors.gray
-          }
-          VisibilityText={
-            content === 'top'
-              ? topVisibility[i]
-                ? ':'
-                : ''
-              : bottomVisibility[i]
-              ? ':'
-              : ''
-          }
-          VisibilityInput={
-            content === 'top' ? (
-              topVisibility[i] ? (
-                <Input />
+    <View style={{flexDirection: 'row', gap: 10}}>
+      <View style={{gap: 5}}>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[0] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(0);
+              }}>
+              <Icon name={iconName[0]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[0],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 1'} {visibilityText[0]}
+              </Text>
+              {visibilityText[0] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
               ) : (
                 <></>
-              )
-            ) : bottomVisibility[i] ? (
-              <Input />
-            ) : (
-              <></>
-            )
-          }
-          Count={i + 1}
-        />
-      );
-      console.log('200');
-    }),
-    topVisibility,
-  );
-  var output = [];
-  let i = position === 'left' ? 0 : 3;
-  let m = position === 'left' ? 3 : 6;
-  let arr = [];
-  for (i; i < m; i++) {
-    var item = (
-      <View style={{flexDirection: 'row', gap: 1.5}}>
-        {position === 'left' ? (
-          <TouchableOpacity
-            onPress={() => {
-              if (content === 'top') {
-                if (topVisibility[i]) {
-                  arr = [...topVisibility];
-                  arr[i] = false;
-                  setTopVisibility(arr);
-                } else {
-                  arr = [...topVisibility];
-                  arr[i] = true;
-                  setTopVisibility(arr);
-                }
-              } else {
-                if (bottomVisibility[i]) {
-                  arr = [...bottomVisibility];
-                  arr[i] = false;
-                  setBottomVisibility(arr);
-                } else {
-                  arr = [...bottomVisibility];
-                  arr[i] = true;
-                  setBottomVisibility(arr);
-                }
-              }
-            }}>
-            <Icon
-              name={
-                content === 'top'
-                  ? topVisibility[i]
-                    ? 'decrease'
-                    : 'increase'
-                  : bottomVisibility[i]
-                  ? 'decrease'
-                  : 'increase'
-              }
-            />
-          </TouchableOpacity>
-        ) : (
-          <></>
-        )}
-        {fun(i)}
-        {position === 'right' ? (
-          <TouchableOpacity
-            onPress={() => {
-              if (content === 'top') {
-                if (topVisibility[i]) {
-                  arr = [...topVisibility];
-                  arr[i] = false;
-                  setTopVisibility(arr);
-                } else {
-                  arr = [...topVisibility];
-                  arr[i] = true;
-                  setTopVisibility(arr);
-                }
-              } else {
-                if (bottomVisibility[i]) {
-                  arr = [...bottomVisibility];
-                  arr[i] = false;
-                  setBottomVisibility(arr);
-                } else {
-                  arr = [...bottomVisibility];
-                  arr[i] = true;
-                  setBottomVisibility(arr);
-                }
-              }
-            }}>
-            <Icon
-              name={
-                content === 'top'
-                  ? topVisibility[i]
-                    ? 'decrease'
-                    : 'increase'
-                  : bottomVisibility[i]
-                  ? 'decrease'
-                  : 'increase'
-              }
-            />
-          </TouchableOpacity>
-        ) : (
-          <></>
-        )}
+              )}
+            </View>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[1] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(1);
+              }}>
+              <Icon name={iconName[1]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[1],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 2'} {visibilityText[1]}
+              </Text>
+              {visibilityText[1] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[2] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(2);
+              }}>
+              <Icon name={iconName[2]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[2],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 3'} {visibilityText[2]}
+              </Text>
+              {visibilityText[2] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+        </View>
       </View>
-    );
-    output[i] = item;
-  }
-
-  return <View>{output}</View>;
+      <View style={{gap: 5}}>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[3],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 4'} {visibilityText[3]}
+              </Text>
+              {visibilityText[3] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[3] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(3);
+              }}>
+              <Icon name={iconName[3]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[4],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 5'} {visibilityText[4]}
+              </Text>
+              {visibilityText[4] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[4] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(4);
+              }}>
+              <Icon name={iconName[4]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[5],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 6'} {visibilityText[5]}
+              </Text>
+              {visibilityText[5] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[5] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(5);
+              }}>
+              <Icon name={iconName[5]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+      </View>
+    </View>
+  );
 };
 
+const Input_Bottom = () => {
+  const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
+    colors.blue,
+    colors.blue,
+    colors.blue,
+    colors.blue,
+    colors.gray,
+    colors.gray,
+  ]);
+  const [visibilityText, setVisibilityText] = useState([
+    ':',
+    ':',
+    ':',
+    ':',
+    '',
+    '',
+  ]);
+  const [iconName, setIconName] = useState([
+    'decrease',
+    'decrease',
+    'decrease',
+    'decrease',
+    'increase',
+    '',
+  ]);
+
+  const handleLogout = i => {
+    if (visibilityBackgroundColor[i] === colors.blue) {
+      for (let index = i; index < 6; index++) {
+        if (visibilityBackgroundColor[index] === colors.gray) {
+          i = index - 1;
+          break;
+        }
+      }
+
+      let newarr = [...visibilityBackgroundColor];
+      newarr[i] = colors.gray;
+      setVisibilityBackgroundColor(newarr);
+
+      newarr = [...visibilityText];
+      newarr[i] = '';
+      setVisibilityText(newarr);
+
+      newarr = [...iconName];
+      newarr[i] = 'increase';
+      newarr[i + 1] = '';
+      setIconName(newarr);
+    } else {
+      let newarr = [...visibilityBackgroundColor];
+      newarr[i] = colors.blue;
+      setVisibilityBackgroundColor(newarr);
+
+      newarr = [...visibilityText];
+      newarr[i] = ':';
+      setVisibilityText(newarr);
+
+      newarr = [...iconName];
+      newarr[i] = 'decrease';
+      newarr[i + 1] = 'increase';
+      setIconName(newarr);
+    }
+
+    console.log(setVisibilityBackgroundColor);
+  };
+
+  useEffect(() => {
+    handleLogout();
+  }, []);
+
+  return (
+    <View style={{flexDirection: 'row', gap: 10}}>
+      <View style={{gap: 5}}>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[0] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(0);
+              }}>
+              <Icon name={iconName[0]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[0],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 1'} {visibilityText[0]}
+              </Text>
+              {visibilityText[0] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[1] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(1);
+              }}>
+              <Icon name={iconName[1]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[1],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 2'} {visibilityText[1]}
+              </Text>
+              {visibilityText[1] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          {iconName[2] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(2);
+              }}>
+              <Icon name={iconName[2]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[2],
+                borderTopLeftRadius: 15,
+                borderBottomLeftRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 3'} {visibilityText[2]}
+              </Text>
+              {visibilityText[2] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={{gap: 5}}>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[3],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 4'} {visibilityText[3]}
+              </Text>
+              {visibilityText[3] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[3] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(3);
+              }}>
+              <Icon name={iconName[3]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[4],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 5'} {visibilityText[4]}
+              </Text>
+              {visibilityText[4] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[4] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(4);
+              }}>
+              <Icon name={iconName[4]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+        <View style={{flexDirection: 'row', gap: 1.5}}>
+          <View style={{flexDirection: 'row', gap: 1.5}}>
+            <View
+              style={{
+                width: 138,
+                height: 46,
+                backgroundColor: visibilityBackgroundColor[5],
+                borderTopRightRadius: 15,
+                borderBottomRightRadius: 15,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontHeight: 20,
+                  color: colors.black,
+                }}>
+                {'KSQ 6'} {visibilityText[5]}
+              </Text>
+              {visibilityText[5] === ':' ? (
+                <TextInput
+                  style={{
+                    width: 48,
+                    marginLeft: 3,
+                    fontSize: 20,
+                  }}
+                  placeholder="0"
+                />
+              ) : (
+                <></>
+              )}
+            </View>
+          </View>
+          {iconName[5] !== '' ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleLogout(5);
+              }}>
+              <Icon name={iconName[5]} />
+            </TouchableOpacity>
+          ) : (
+            <View style={{width: 41, height: 41}}></View>
+          )}
+        </View>
+      </View>
+    </View>
+  );
+};
 const YearlyPrice = () => {
   return (
     <View style={{flex: 1}}>
@@ -191,10 +727,7 @@ const YearlyPrice = () => {
             }}>
             Birinci Yarımil KSQ
           </Text>
-          <View style={{flexDirection: 'row', gap: 10}}>
-            <Inputs Position="left" Content={'top'} />
-            <Inputs Position="right" Content={'top'} />
-          </View>
+          <Input_Top />
         </View>
         <View style={{flex: 30, alignItems: 'center'}}>
           <Text
@@ -209,7 +742,6 @@ const YearlyPrice = () => {
             Position="left_right"
             VisibilityBackgroundColor={colors.blue}
             VisibilityText={':'}
-            VisibilityInput={<Input />}
             Count={''}
           />
         </View>
@@ -225,10 +757,7 @@ const YearlyPrice = () => {
             }}>
             İkinci Yarımil KSQ
           </Text>
-          <View style={{flexDirection: 'row', gap: 10}}>
-            <Inputs Position="left" Content={'bottom'} />
-            <Inputs Position="right" Content={'bottom'} />
-          </View>
+          <Input_Bottom />
         </View>
         <View style={{flex: 30, alignItems: 'center'}}>
           <Text
@@ -239,7 +768,12 @@ const YearlyPrice = () => {
             }}>
             İkinci Yarımil BSQ
           </Text>
-          <PriceInput Position="left_right" Visibility={true} Count="" />
+          <PriceInput
+            Position="left_right"
+            VisibilityBackgroundColor={colors.blue}
+            VisibilityText={':'}
+            Count={''}
+          />
         </View>
       </View>
       <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>

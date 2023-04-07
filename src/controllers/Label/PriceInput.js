@@ -1,21 +1,7 @@
-import {View, Text} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import React, {useState} from 'react';
-import {TextInput} from 'react-native-gesture-handler';
 import {colors} from '../../config/colors';
 import Icon from '../Icon/Icon';
-
-const Input = () => {
-  return (
-    <TextInput
-      style={{
-        width: 48,
-        marginLeft: 3,
-        fontSize: 20,
-      }}
-      placeholder="0"
-    />
-  );
-};
 
 const PriceInput = props => {
   const [border, setBorder] = useState(props.Position);
@@ -23,13 +9,12 @@ const PriceInput = props => {
     props.VisibilityBackgroundColor,
   );
   const [visibilityText, setVisibilityText] = useState(props.VisibilityText);
-  const [visibilityInput, setVisibilityInput] = useState(props.VisibilityInput);
   const [count, setCount] = useState(props.Count);
   return (
     <View style={{flexDirection: 'row', gap: 1.5}}>
       <View
         style={{
-          width: border === 'left_right' ? 207 : 138,
+          width: 138,
           height: 46,
           backgroundColor: visibilityBackgroundColor,
           borderTopLeftRadius:
@@ -52,7 +37,18 @@ const PriceInput = props => {
           }}>
           {border === 'left_right' ? 'BSQ' : 'KSQ'} {count} {visibilityText}
         </Text>
-        {visibilityInput}
+        {visibilityText === ':' ? (
+          <TextInput
+            style={{
+              width: 48,
+              marginLeft: 3,
+              fontSize: 20,
+            }}
+            placeholder="0"
+          />
+        ) : (
+          <></>
+        )}
       </View>
     </View>
   );
