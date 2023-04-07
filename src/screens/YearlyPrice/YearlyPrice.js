@@ -39,6 +39,9 @@ const Input_Top = () => {
           break;
         }
       }
+      if (visibilityBackgroundColor[5] === colors.blue) {
+        i = 5;
+      }
 
       let newarr = [...visibilityBackgroundColor];
       newarr[i] = colors.gray;
@@ -393,6 +396,9 @@ const Input_Bottom = () => {
           i = index - 1;
           break;
         }
+      }
+      if (visibilityBackgroundColor[5] === colors.blue) {
+        i = 5;
       }
 
       let newarr = [...visibilityBackgroundColor];

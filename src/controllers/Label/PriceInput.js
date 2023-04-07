@@ -14,7 +14,7 @@ const PriceInput = props => {
     <View style={{flexDirection: 'row', gap: 1.5}}>
       <View
         style={{
-          width: 138,
+          width: border === 'left_right' ? 207 : 138,
           height: 46,
           backgroundColor: visibilityBackgroundColor,
           borderTopLeftRadius:
