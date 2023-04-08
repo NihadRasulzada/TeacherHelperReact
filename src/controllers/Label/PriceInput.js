@@ -4,27 +4,14 @@ import {colors} from '../../config/colors';
 import Icon from '../Icon/Icon';
 
 const PriceInput = props => {
-  const [border, setBorder] = useState(props.Position);
-  const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState(
-    props.VisibilityBackgroundColor,
-  );
-  const [visibilityText, setVisibilityText] = useState(props.VisibilityText);
-  const [count, setCount] = useState(props.Count);
   return (
     <View style={{flexDirection: 'row', gap: 1.5}}>
       <View
         style={{
-          width: border === 'left_right' ? 207 : 138,
+          width: border === 207,
           height: 46,
           backgroundColor: visibilityBackgroundColor,
-          borderTopLeftRadius:
-            border === 'left' ? 15 : border === 'left_right' ? 15 : 0,
-          borderBottomLeftRadius:
-            border === 'left' ? 15 : border === 'left_right' ? 15 : 0,
-          borderTopRightRadius:
-            border === 'right' ? 15 : border === 'left_right' ? 15 : 0,
-          borderBottomRightRadius:
-            border === 'right' ? 15 : border === 'left_right' ? 15 : 0,
+          borderRadius: 15,
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
@@ -35,7 +22,7 @@ const PriceInput = props => {
             fontHeight: 20,
             color: colors.black,
           }}>
-          {border === 'left_right' ? 'BSQ' : 'KSQ'} {count} {visibilityText}
+          BSQ {visibilityText}
         </Text>
         {visibilityText === ':' ? (
           <TextInput
