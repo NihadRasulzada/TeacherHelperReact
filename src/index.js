@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Salary from './screens/Salary/Salary';
 import YearlyPrice from './screens/YearlyPrice/YearlyPrice';
 import TeacherProgram from './screens/TeacherProgram/TeacherProgram';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Stack = createStackNavigator();
 

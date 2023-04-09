@@ -1,19 +1,242 @@
-import {View, Text, ScrollView, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import Button from '../../controllers/Button/Button';
 import {colors} from '../../config/colors';
 import Footer from '../../controllers/Footer/Footer';
 import InputLabel from '../../controllers/Label/InputLabel';
-import {Switch} from 'react-native-gesture-handler';
+import {strings} from '../../config/string';
 
 const Salary = () => {
-  const [switchValue, setSwitchValue] = useState(false);
+  const [switchValueSR, setSwitchValueSR] = useState(true);
+  const [switchValueT, setSwitchValueT] = useState(true);
+  const [switchValueS, setSwitchValueS] = useState(false);
 
-  const toggleSwitch = value => {
-    //To handle switch toggle
-    setSwitchValue(value);
-    //State changes according to switch
+  const SwitchSelectorSR = () => {
+    if (switchValueSR === true) {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueSR(false);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-end',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.yes}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueSR(true);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-start',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.no}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
   };
+  const SwitchSelectorT = () => {
+    if (switchValueT === true) {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueT(false);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-end',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.ali}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueT(true);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-start',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.orta}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+  };
+  const SwitchSelectorS = () => {
+    if (switchValueS === true) {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueS(false);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-end',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.yes}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchValueS(true);
+          }}
+          style={{
+            width: 64,
+            height: 36,
+            backgroundColor: colors.blue,
+            borderRadius: 35,
+            alignItems: 'flex-start',
+          }}>
+          <View
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: colors.white,
+              borderRadius: 36,
+              borderWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                lineHeight: 17,
+                color: colors.black,
+              }}>
+              {strings.no}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+  };
+
   return (
     <View style={{flex: 1}}>
       <View style={{flex: 4}}>
@@ -48,7 +271,7 @@ const Salary = () => {
                   }}></TextInput>
               </View>
             </View>
-            <View style={{flexDirection: 'row', gap: 60, marginTop: 25}}>
+            <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
               <View style={{width: '61%', height: 52}}>
                 <InputLabel Name="Sinif rəhbərisinizmi?" />
               </View>
@@ -56,12 +279,13 @@ const Salary = () => {
                 style={{
                   width: '18%',
                   height: 52,
-                  justifyContent: 'flex-end',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
                 }}>
-                <Switch onValueChange={toggleSwitch} value={switchValue} />
+                {SwitchSelectorSR()}
               </View>
             </View>
-            <View style={{flexDirection: 'row', gap: 60, marginTop: 25}}>
+            <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
               <View style={{width: '61%', height: 52}}>
                 <InputLabel Name="Təhsiliniz" />
               </View>
@@ -71,7 +295,7 @@ const Salary = () => {
                   height: 52,
                   justifyContent: 'flex-end',
                 }}>
-                <Switch onValueChange={toggleSwitch} value={switchValue} />
+                {SwitchSelectorT()}
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
@@ -158,7 +382,7 @@ const Salary = () => {
                   }}></TextInput>
               </View>
             </View>
-            <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
+            <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
               <View
                 style={{
                   width: '61%',
@@ -172,27 +396,35 @@ const Salary = () => {
                   height: 52,
                   justifyContent: 'flex-end',
                 }}>
-                <Switch onValueChange={toggleSwitch} value={switchValue} />
+                {SwitchSelectorS()}
               </View>
             </View>
-            <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
-              <View
-                style={{
-                  width: '57%',
-                  height: 52,
-                }}>
-                <InputLabel Name="Sertfikasiyanız balınız" />
-              </View>
-              <View
-                style={{width: '18%', height: 52, justifyContent: 'flex-end'}}>
-                <TextInput
+            {switchValueS === true ? (
+              <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
+                <View
                   style={{
-                    borderBottomWidth: 1,
-                    fontSize: 20,
-                    borderColor: colors.blue,
-                  }}></TextInput>
+                    width: '57%',
+                    height: 52,
+                  }}>
+                  <InputLabel Name="Sertfikasiyanız balınız" />
+                </View>
+                <View
+                  style={{
+                    width: '18%',
+                    height: 52,
+                    justifyContent: 'flex-end',
+                  }}>
+                  <TextInput
+                    style={{
+                      borderBottomWidth: 1,
+                      fontSize: 20,
+                      borderColor: colors.blue,
+                    }}></TextInput>
+                </View>
               </View>
-            </View>
+            ) : (
+              <></>
+            )}
           </ScrollView>
         </View>
       </View>
