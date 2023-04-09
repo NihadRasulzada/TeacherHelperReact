@@ -1,23 +1,18 @@
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView,
-  LogBox,
-} from 'react-native';
+import {TouchableOpacity, View, Text, TextInput} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
-import PriceInput from '../../controllers/Label/PriceInput';
 import Icon from '../../controllers/Icon/Icon';
 import Button from '../../controllers/Button/Button';
-import {ScrollView} from 'react-native-gesture-handler';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const YearlyPrice = () => {
   const [isCheckedIY, setIsCheckedIY] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
+  const inputTextTopKSQ = [];
+  const inputTextBottomKSQ = [];
+  let inputTextBottomBSQ;
+  const [inputTextTopBSQ, setInputTextTopBSQ] = useState();
 
   const Input_Top = () => {
     const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
@@ -147,6 +142,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[0] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -193,6 +191,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[1] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -239,6 +240,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[2] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -277,6 +281,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[3] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -323,6 +330,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[4] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -369,6 +379,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextTopKSQ[5] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -516,6 +529,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[0] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -562,6 +578,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[1] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -608,6 +627,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[2] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -646,6 +668,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[3] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -692,6 +717,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[4] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -738,6 +766,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomKSQ[5] = text;
+                    }}
                   />
                 ) : (
                   <></>
@@ -826,6 +857,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      setInputTextTopBSQ(text);
+                    }}
                   />
                 ) : isCheckedB === true ? (
                   <></>
@@ -837,6 +871,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      setInputTextTopBSQ(text);
+                    }}
                   />
                 )}
               </View>
@@ -911,6 +948,9 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    onChangeText={text => {
+                      inputTextBottomBSQ = text;
+                    }}
                   />
                 )}
               </View>
@@ -940,6 +980,14 @@ const YearlyPrice = () => {
               lineHeight={34}
               color={colors.white}
               name="HESABLA"
+              onPress={() => {
+                console.log(
+                  inputTextTopKSQ,
+                  inputTextBottomKSQ,
+                  inputTextTopBSQ,
+                  inputTextBottomBSQ,
+                );
+              }}
             />
           </View>
           <View
