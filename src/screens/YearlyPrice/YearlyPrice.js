@@ -1,18 +1,30 @@
-import {TouchableOpacity, View, Text, TextInput} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Modal,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
 import Icon from '../../controllers/Icon/Icon';
 import Button from '../../controllers/Button/Button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {strings} from '../../config/string';
+import YearlyPriceHesabla from './YearlyPriceHesabla';
 
 const YearlyPrice = () => {
   const [isCheckedIY, setIsCheckedIY] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
-  const inputTextTopKSQ = [];
-  const inputTextBottomKSQ = [];
-  let inputTextBottomBSQ;
-  const [inputTextTopBSQ, setInputTextTopBSQ] = useState();
+  let inputTextTopKSQ = ['0', '0', '0', '0', '0', '0'];
+  let inputTextBottomKSQ = ['0', '0', '0', '0', '0', '0'];
+  let inputTextBottomBSQ = '0';
+  const [inputTextTopBSQ, setInputTextTopBSQ] = useState('0');
+
+  const [isKSQ, setIsKSQ] = useState(false);
+  const [isBSQ, setIsBSQ] = useState(false);
 
   const Input_Top = () => {
     const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
@@ -54,16 +66,25 @@ const YearlyPrice = () => {
 
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.gray;
-        setVisibilityBackgroundColor(newarr);
+        const f = () => {
+          setVisibilityBackgroundColor(newarr);
+        };
+        f();
 
         newarr = [...visibilityText];
         newarr[i] = '';
-        setVisibilityText(newarr);
+        const fi = () => {
+          setVisibilityText(newarr);
+        };
+        fi();
 
         newarr = [...iconName];
         newarr[i] = 'increase';
         newarr[i + 1] = '';
-        setIconName(newarr);
+        const fiw = () => {
+          setIconName(newarr);
+        };
+        fiw();
       } else {
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.blue;
@@ -141,13 +162,14 @@ const YearlyPrice = () => {
                       marginLeft: 3,
                       fontSize: 20,
                     }}
+                    keyboardType="numeric"
                     placeholder="0"
                     onChangeText={text => {
                       inputTextTopKSQ[0] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[0] = '')}</>
                 )}
               </View>
             </View>
@@ -190,13 +212,14 @@ const YearlyPrice = () => {
                       marginLeft: 3,
                       fontSize: 20,
                     }}
+                    keyboardType="numeric"
                     placeholder="0"
                     onChangeText={text => {
                       inputTextTopKSQ[1] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[1] = '')}</>
                 )}
               </View>
             </View>
@@ -240,12 +263,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextTopKSQ[2] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[2] = '')}</>
                 )}
               </View>
             </View>
@@ -281,12 +305,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextTopKSQ[3] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[3] = '')}</>
                 )}
               </View>
             </View>
@@ -330,12 +355,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextTopKSQ[4] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[4] = '')}</>
                 )}
               </View>
             </View>
@@ -379,12 +405,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextTopKSQ[5] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextTopKSQ[5] = '')}</>
                 )}
               </View>
             </View>
@@ -529,12 +556,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[0] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[0] = '')}</>
                 )}
               </View>
             </View>
@@ -578,12 +606,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[1] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[1] = '')}</>
                 )}
               </View>
             </View>
@@ -627,12 +656,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[2] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[2] = '')}</>
                 )}
               </View>
             </View>
@@ -668,12 +698,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[3] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[3] = '')}</>
                 )}
               </View>
             </View>
@@ -717,12 +748,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[4] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[4] = '')}</>
                 )}
               </View>
             </View>
@@ -766,12 +798,13 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomKSQ[5] = text;
                     }}
                   />
                 ) : (
-                  <></>
+                  <>{(inputTextBottomKSQ[5] = '')}</>
                 )}
               </View>
             </View>
@@ -857,6 +890,7 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       setInputTextTopBSQ(text);
                     }}
@@ -871,6 +905,7 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       setInputTextTopBSQ(text);
                     }}
@@ -948,6 +983,7 @@ const YearlyPrice = () => {
                       fontSize: 20,
                     }}
                     placeholder="0"
+                    keyboardType="numeric"
                     onChangeText={text => {
                       inputTextBottomBSQ = text;
                     }}
@@ -965,29 +1001,13 @@ const YearlyPrice = () => {
               justifyContent: 'flex-end',
               alignItems: 'center',
             }}>
-            <Button
-              width={'59%'}
-              height={'77%'}
-              borderWidth={4}
-              borderColor={colors.blue}
-              borderTopLeftRadius={50}
-              borderTopRightRadius={50}
-              borderBottomLeftRadius={50}
-              borderBottomRightRadius={50}
-              backgroundColor={colors.orange}
-              fontWeight={400}
-              fontSize={28}
-              lineHeight={34}
-              color={colors.white}
-              name="HESABLA"
-              onPress={() => {
-                console.log(
-                  inputTextTopKSQ,
-                  inputTextBottomKSQ,
-                  inputTextTopBSQ,
-                  inputTextBottomBSQ,
-                );
-              }}
+            <YearlyPriceHesabla
+              isCheckedIY={isCheckedIY}
+              isCheckedB={isCheckedB}
+              inputTextTopKSQ={inputTextTopKSQ}
+              inputTextBottomKSQ={inputTextBottomKSQ}
+              inputTextBottomBSQ={inputTextBottomBSQ}
+              inputTextTopBSQ={inputTextTopBSQ}
             />
           </View>
           <View
