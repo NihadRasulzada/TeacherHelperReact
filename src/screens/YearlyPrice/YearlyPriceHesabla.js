@@ -5,12 +5,16 @@ import {colors} from '../../config/colors';
 import {strings} from '../../config/string';
 
 const YearlyPriceHesabla = props => {
-  const [isCheckedIY, setIsCheckedIY] = props.isCheckedIY;
-  const [isCheckedB, setIsCheckedB] = props.isCheckedB;
-  const [inputTextTopKSQ, setInputTextTopKSQ] = props.inputTextTopKSQ;
-  const [inputTextBottomKSQ, setInputTextBottomKSQ] = props.inputTextBottomKSQ;
-  const [inputTextBottomBSQ, setInputTextBottomBSQ] = props.inputTextBottomBSQ;
-  const [inputTextTopBSQ, setInputTextTopBSQ] = props.inputTextTopBSQ;
+  const [isCheckedIY, setIsCheckedIY] = useState(props.isCheckedIY);
+  const [isCheckedB, setIsCheckedB] = useState(props.isCheckedB);
+  const [inputTextTopKSQ, setInputTextTopKSQ] = useState(props.inputTextTopKSQ);
+  const [inputTextBottomKSQ, setInputTextBottomKSQ] = useState(
+    props.inputTextBottomKSQ,
+  );
+  const [inputTextBottomBSQ, setInputTextBottomBSQ] = useState(
+    props.inputTextBottomBSQ,
+  );
+  const [inputTextTopBSQ, setInputTextTopBSQ] = useState(props.inputTextTopBSQ);
 
   const handlePress = () => {
     console.log('isCheckedIY', isCheckedIY);
