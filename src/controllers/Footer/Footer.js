@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, RefreshControlBase} from 'react-native';
 import * as React from 'react';
 import {useState} from 'react';
 import Icon from '../Icon/Icon';
@@ -129,7 +129,7 @@ const Footer = props => {
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        height: visible === true ? '61%' : '12%',
+        height: visible === true ? '61%' : 100,
       }}>
       <View
         style={{

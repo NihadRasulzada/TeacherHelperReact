@@ -4,32 +4,207 @@ import Button from '../../controllers/Button/Button';
 import {colors} from '../../config/colors';
 import {strings} from '../../config/string';
 
-const YearlyPriceHesabla = props => {
-  const [isCheckedIY, setIsCheckedIY] = useState(props.isCheckedIY);
-  const [isCheckedB, setIsCheckedB] = useState(props.isCheckedB);
-  const [inputTextTopKSQ, setInputTextTopKSQ] = useState(props.inputTextTopKSQ);
-  const [inputTextBottomKSQ, setInputTextBottomKSQ] = useState(
-    props.inputTextBottomKSQ,
-  );
-  const [inputTextBottomBSQ, setInputTextBottomBSQ] = useState(
-    props.inputTextBottomBSQ,
-  );
-  const [inputTextTopBSQ, setInputTextTopBSQ] = useState(props.inputTextTopBSQ);
-
-  const handlePress = () => {
-    console.log('isCheckedIY', isCheckedIY);
-    console.log('isCheckedB', isCheckedB);
-    console.log('inputTextTopKSQ', inputTextTopKSQ);
-    console.log('inputTextBottomKSQ', inputTextBottomKSQ);
-    console.log('inputTextBottomBSQ', inputTextBottomBSQ);
-    console.log('inputTextTopBSQ', inputTextTopBSQ);
-  };
-
+const YearlyPriceHesabla = ({
+  isCheckedIY,
+  isCheckedB,
+  inputTextTopKSQ,
+  inputTextBottomKSQ,
+  inputTextBottomBSQ,
+  inputTextTopBSQ,
+}) => {
   const [KSQ0DialogVisible, setKSQ0DialogVisible] = useState(false);
   const [BSQ0DialogVisible, setBSQ0DialogVisible] = useState(false);
   const [KSQBSQ0DialogVisible, setKSQBSQ0DialogVisible] = useState(false);
   const [BYDialogVisible, setBYDialogVisible] = useState(false);
   const [IQDialogVisible, setIQDialogVisible] = useState(false);
+
+  const [IQDialogIQ, setIQDialogIQ] = useState('');
+  const [IQDialogIY, setIQDialogIY] = useState('');
+  const [IQDialogBY, setIQDialogBY] = useState('');
+  const [BYDialogBY, setBYDialogBY] = useState('');
+
+  let isKSQ = false,
+    isBSQ = false;
+
+  const KSQ0DialogYes = () => {
+    setKSQ0DialogVisible(false);
+    if (isCheckedIY) {
+      setIQDialogVisible(true);
+    } else {
+      setBYDialogVisible(true);
+    }
+  };
+  const BSQ0DialogYes = () => {
+    setBSQ0DialogVisible(false);
+    if (isCheckedIY) {
+      setIQDialogVisible(true);
+    } else {
+      setBYDialogVisible(true);
+    }
+  };
+  const KSQBSQ0DialogYes = () => {
+    setKSQBSQ0DialogVisible(false);
+    if (isCheckedIY) {
+      setIQDialogVisible(true);
+    } else {
+      setBYDialogVisible(true);
+    }
+  };
+
+  const handlePress = () => {
+    console.log(inputTextTopBSQ);
+    if (isCheckedIY) {
+      if (isCheckedB) {
+        inputTextBottomKSQ.map(value => {
+          if (value == '0') {
+            isKSQ = true;
+          }
+        });
+        if (isKSQ) {
+          setKSQ0DialogVisible(true);
+          for (let index = 0; index < 6; index++) {
+            if (inputTextBottomKSQ[index] !== '') {
+              inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+            }
+          }
+          setIQDialogBY(parseInt(inputTextTopBSQ));
+          let say = 0;
+          let cem = 0;
+          for (let index = 0; index < 6; index++) {
+            if (typeof inputTextBottomKSQ[index] === 'number') {
+              say++;
+              cem += inputTextBottomKSQ[index];
+            }
+          }
+          setIQDialogIY(cem / say);
+          setIQDialogIQ((parseInt(inputTextTopBSQ) + cem / say) / 2);
+        } else {
+          setIQDialogVisible(true);
+          for (let index = 0; index < 6; index++) {
+            if (inputTextBottomKSQ[index] !== '') {
+              inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+            }
+          }
+          setIQDialogBY(parseInt(inputTextTopBSQ));
+          let say = 0;
+          let cem = 0;
+          for (let index = 0; index < 6; index++) {
+            if (typeof inputTextBottomKSQ[index] === 'number') {
+              say++;
+              cem += inputTextBottomKSQ[index];
+            }
+          }
+          setIQDialogIY(cem / say);
+          setIQDialogIQ((parseInt(inputTextTopBSQ) + cem / say) / 2);
+        }
+      } else {
+        inputTextBottomKSQ.map(value => {
+          if (value == '0') {
+            isKSQ = true;
+          }
+        });
+        inputTextBottomBSQ == '0' ? (isBSQ = true) : (isBSQ = false);
+
+        for (let index = 0; index < 6; index++) {
+          if (inputTextBottomKSQ[index] !== '') {
+            inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+          }
+        }
+        setIQDialogBY(parseInt(inputTextTopBSQ));
+        let say = 0;
+        let cem = 0;
+        for (let index = 0; index < 6; index++) {
+          if (typeof inputTextBottomKSQ[index] === 'number') {
+            say++;
+            cem += inputTextBottomKSQ[index];
+          }
+        }
+        setIQDialogIY(parseInt((cem / say) * 0.4 + inputTextBottomBSQ * 0.6));
+        setIQDialogIQ(
+          parseInt(
+            (parseInt(inputTextTopBSQ) +
+              parseInt((cem / say) * 0.4 + inputTextBottomBSQ * 0.6)) /
+              2,
+          ),
+        );
+
+        if (isKSQ === true && isBSQ === true) {
+          setKSQBSQ0DialogVisible(true);
+        } else if (isKSQ === true) {
+          setKSQ0DialogVisible(true);
+        } else if (isBSQ === true) {
+          setBSQ0DialogVisible(true);
+        } else {
+          setIQDialogVisible(true);
+        }
+      }
+    } else {
+      if (isCheckedB) {
+        inputTextTopKSQ.map(value => {
+          if (value == '0') {
+            isKSQ = true;
+          }
+        });
+        for (let index = 0; index < 6; index++) {
+          if (inputTextTopKSQ[index] !== '') {
+            inputTextTopKSQ[index] = parseInt(inputTextTopKSQ[index]);
+          }
+        }
+        let say = 0;
+        let cem = 0;
+        for (let index = 0; index < 6; index++) {
+          if (typeof inputTextTopKSQ[index] === 'number') {
+            say++;
+            cem += inputTextTopKSQ[index];
+          }
+        }
+        setBYDialogBY(parseInt(cem / say));
+        if (isKSQ) {
+          setKSQ0DialogVisible(true);
+        } else {
+          setBYDialogVisible(true);
+        }
+      } else {
+        inputTextTopKSQ.map(value => {
+          if (value == '0') {
+            isKSQ = true;
+          }
+        });
+        inputTextTopBSQ == '0' || inputTextTopBSQ == ''
+          ? (isBSQ = true)
+          : (isBSQ = false);
+        if (inputTextTopBSQ == '') {
+          inputTextTopBSQ = '0';
+        }
+        for (let index = 0; index < 6; index++) {
+          if (inputTextTopKSQ[index] !== '') {
+            inputTextTopKSQ[index] = parseInt(inputTextTopKSQ[index]);
+          }
+        }
+        let say = 0;
+        let cem = 0;
+        for (let index = 0; index < 6; index++) {
+          if (typeof inputTextTopKSQ[index] === 'number') {
+            say++;
+            cem += inputTextTopKSQ[index];
+          }
+        }
+        setBYDialogBY(
+          parseInt((cem / say) * 0.4 + parseInt(inputTextTopBSQ) * 0.6),
+        );
+
+        if (isKSQ === true && isBSQ === true) {
+          setKSQBSQ0DialogVisible(true);
+        } else if (isKSQ === true) {
+          setKSQ0DialogVisible(true);
+        } else if (isBSQ === true) {
+          setBSQ0DialogVisible(true);
+        } else {
+          setBYDialogVisible(true);
+        }
+      }
+    }
+  };
 
   const KSQ0Dialog = ({visible, onClose}) => {
     return (
@@ -87,7 +262,7 @@ const YearlyPriceHesabla = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  onPress={onClose}>
+                  onPress={KSQ0DialogYes}>
                   <Text
                     style={{
                       fontSize: 28,
@@ -160,7 +335,7 @@ const YearlyPriceHesabla = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  onPress={onClose}>
+                  onPress={BSQ0DialogYes}>
                   <Text
                     style={{
                       fontSize: 28,
@@ -233,7 +408,7 @@ const YearlyPriceHesabla = props => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}
-                  onPress={onClose}>
+                  onPress={KSQBSQ0DialogYes}>
                   <Text
                     style={{
                       fontSize: 28,
@@ -270,7 +445,7 @@ const YearlyPriceHesabla = props => {
                 Birinci Yarımil:
               </Text>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                90/5
+                {BYDialogBY}
               </Text>
             </View>
             <View
@@ -314,24 +489,32 @@ const YearlyPriceHesabla = props => {
         onRequestClose={onClose}>
         <View style={styles.modalContainer}>
           <View style={styles.dialogContainer}>
-            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+              }}>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
                 Q / B
               </Text>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
-              <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
+              <Text style={{fontSize: 20, lineHeight: 25, color: colors.black}}>
                 Birinci Yarımil:
               </Text>
               <View style={{flex: 1, alignItems: 'flex-end'}}>
                 <Text
-                  style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                  90/5
+                  style={{
+                    fontSize: 25,
+                    lineHeight: 30,
+                    color: colors.black,
+                  }}>
+                  {IQDialogBY}
                 </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
-              <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
+              <Text style={{fontSize: 20, lineHeight: 25, color: colors.black}}>
                 Ikinci Yarımil:
               </Text>
               <View style={{flex: 1, alignItems: 'flex-end'}}>
@@ -341,12 +524,12 @@ const YearlyPriceHesabla = props => {
                     lineHeight: 30,
                     color: colors.black,
                   }}>
-                  80/5
+                  {IQDialogIY}
                 </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
-              <Text style={{fontSize: 33, lineHeight: 40, color: colors.black}}>
+              <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
                 Illik Qiymət:
               </Text>
               <Text
@@ -356,7 +539,7 @@ const YearlyPriceHesabla = props => {
                   color: colors.black,
                   justifyContent: 'flex-end',
                 }}>
-                80/5
+                {IQDialogIQ}
               </Text>
             </View>
             <View
@@ -470,8 +653,8 @@ const styles = StyleSheet.create({
   },
   dialogContainer: {
     backgroundColor: colors.orange,
-    padding: 20,
-    borderRadius: 10,
+    padding: 50,
+    borderRadius: 20,
   },
   dialogTitle: {
     fontSize: 20,

@@ -14,17 +14,15 @@ import Button from '../../controllers/Button/Button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {strings} from '../../config/string';
 import YearlyPriceHesabla from './YearlyPriceHesabla';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const YearlyPrice = () => {
   const [isCheckedIY, setIsCheckedIY] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
   let inputTextTopKSQ = ['0', '0', '0', '0', '0', '0'];
   let inputTextBottomKSQ = ['0', '0', '0', '0', '0', '0'];
-  let inputTextBottomBSQ = '0';
+  const [inputTextBottomBSQ, setInputTextBottomBSQ] = useState('0');
   const [inputTextTopBSQ, setInputTextTopBSQ] = useState('0');
-
-  const [isKSQ, setIsKSQ] = useState(false);
-  const [isBSQ, setIsBSQ] = useState(false);
 
   const Input_Top = () => {
     const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
@@ -85,39 +83,46 @@ const YearlyPrice = () => {
           setIconName(newarr);
         };
         fiw();
+        inputTextTopKSQ[i] = '';
       } else {
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.blue;
-        setVisibilityBackgroundColor(newarr);
+        const f = () => {
+          setVisibilityBackgroundColor(newarr);
+        };
+        f();
 
         newarr = [...visibilityText];
         newarr[i] = ':';
-        setVisibilityText(newarr);
+        const fi = () => {
+          setVisibilityText(newarr);
+        };
+        fi();
 
         newarr = [...iconName];
         newarr[i] = 'decrease';
         newarr[i + 1] = 'increase';
-        setIconName(newarr);
+        const fiw = () => {
+          setIconName(newarr);
+        };
+        fiw();
+        inputTextTopKSQ[i] = '0';
       }
-
-      console.log(setVisibilityBackgroundColor);
     };
 
     useEffect(() => {
       handleLogout();
-      for (let index = 0; index < 6; index++) {
-        if (isCheckedIY === true) {
-          setVisibilityBackgroundColor([
-            colors.gray,
-            colors.gray,
-            colors.gray,
-            colors.gray,
-            colors.gray,
-            colors.gray,
-          ]);
-          setVisibilityText(['', '', '', '', '', '']);
-          setIconName(['', '', '', '', '', '']);
-        }
+      if (isCheckedIY === true) {
+        setVisibilityBackgroundColor([
+          colors.gray,
+          colors.gray,
+          colors.gray,
+          colors.gray,
+          colors.gray,
+          colors.gray,
+        ]);
+        setVisibilityText(['', '', '', '', '', '']);
+        setIconName(['', '', '', '', '', '']);
       }
     }, []);
 
@@ -430,24 +435,32 @@ const YearlyPrice = () => {
       </View>
     );
   };
+
   const Input_Bottom = () => {
     const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
-      colors.gray,
-      colors.gray,
-      colors.gray,
-      colors.gray,
+      colors.blue,
+      colors.blue,
+      colors.blue,
+      colors.blue,
       colors.gray,
       colors.gray,
     ]);
     const [visibilityText, setVisibilityText] = useState([
-      '',
-      '',
-      '',
-      '',
+      ':',
+      ':',
+      ':',
+      ':',
       '',
       '',
     ]);
-    const [iconName, setIconName] = useState(['', '', '', '', '', '']);
+    const [iconName, setIconName] = useState([
+      'decrease',
+      'decrease',
+      'decrease',
+      'decrease',
+      'increase',
+      '',
+    ]);
 
     const handleLogout = i => {
       if (visibilityBackgroundColor[i] === colors.blue) {
@@ -473,6 +486,7 @@ const YearlyPrice = () => {
         newarr[i] = 'increase';
         newarr[i + 1] = '';
         setIconName(newarr);
+        inputTextBottomKSQ[i] = '';
       } else {
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.blue;
@@ -486,31 +500,23 @@ const YearlyPrice = () => {
         newarr[i] = 'decrease';
         newarr[i + 1] = 'increase';
         setIconName(newarr);
+        inputTextBottomKSQ[i] = '0';
       }
-
-      console.log(setVisibilityBackgroundColor);
     };
 
     useEffect(() => {
       handleLogout();
-      if (isCheckedIY === true) {
+      if (isCheckedIY === false) {
         setVisibilityBackgroundColor([
-          colors.blue,
-          colors.blue,
-          colors.blue,
-          colors.blue,
+          colors.gray,
+          colors.gray,
+          colors.gray,
+          colors.gray,
           colors.gray,
           colors.gray,
         ]);
-        setVisibilityText([':', ':', ':', ':', '', '']);
-        setIconName([
-          'decrease',
-          'decrease',
-          'decrease',
-          'decrease',
-          'increase',
-          '',
-        ]);
+        setVisibilityText(['', '', '', '', '', '']);
+        setIconName(['', '', '', '', '', '']);
       }
     }, []);
 
@@ -826,244 +832,255 @@ const YearlyPrice = () => {
 
   return (
     <View style={{flex: 1}}>
-      <KeyboardAwareScrollView style={{paddingBottom: '12%'}}>
-        <View style={{flex: 38}}>
-          <View
-            style={{
-              flex: 70,
-              alignItems: 'center',
-              marginTop: 13,
-            }}>
-            <Text
+      <ScrollView>
+        <KeyboardAwareScrollView style={{paddingBottom: '12%'}}>
+          <View style={{flex: 38}}>
+            <View
               style={{
-                fontSize: 30,
-                fontWeight: 30,
-                color: colors.black,
-                marginBottom: 8,
+                flex: 70,
+                alignItems: 'center',
+                marginTop: 13,
               }}>
-              Birinci Yarımil KSQ
-            </Text>
-            <Input_Top />
-          </View>
-          <View style={{flex: 30, alignItems: 'center', marginTop: 24}}>
-            <Text
-              style={{
-                fontSize: 30,
-                lineHeight: 30,
-                color: colors.black,
-              }}>
-              Birinci Yarımil BSQ
-            </Text>
-            <View style={{flexDirection: 'row', gap: 1.5, marginBottom: 14}}>
-              <View
+              <Text
                 style={{
-                  width: 207,
-                  height: 46,
-                  backgroundColor:
-                    isCheckedB === false
-                      ? colors.blue
-                      : isCheckedIY === true
-                      ? colors.blue
-                      : colors.gray,
-                  borderRadius: 15,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  fontSize: 30,
+                  fontWeight: 30,
+                  color: colors.black,
+                  marginBottom: 8,
                 }}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontHeight: 20,
-                    color: colors.black,
-                  }}>
-                  {isCheckedIY === true
-                    ? 'Birinci yarımil:'
-                    : isCheckedB === true
-                    ? 'BSQ'
-                    : 'BSQ:'}
-                </Text>
-                {isCheckedIY === true ? (
-                  <TextInput
-                    style={{
-                      width: 48,
-                      marginLeft: 3,
-                      fontSize: 20,
-                    }}
-                    placeholder="0"
-                    keyboardType="numeric"
-                    onChangeText={text => {
-                      setInputTextTopBSQ(text);
-                    }}
-                  />
-                ) : isCheckedB === true ? (
-                  <></>
-                ) : (
-                  <TextInput
-                    style={{
-                      width: 48,
-                      marginLeft: 3,
-                      fontSize: 20,
-                    }}
-                    placeholder="0"
-                    keyboardType="numeric"
-                    onChangeText={text => {
-                      setInputTextTopBSQ(text);
-                    }}
-                  />
-                )}
-              </View>
+                Birinci Yarımil KSQ
+              </Text>
+              <Input_Top />
             </View>
-          </View>
-        </View>
-        <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>
-        <View style={{flex: 37}}>
-          <View style={{flex: 70, alignItems: 'center'}}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontWeight: 30,
-                color: colors.black,
-              }}>
-              İkinci Yarımil KSQ
-            </Text>
-            <Input_Bottom />
-          </View>
-          <View
-            style={{
-              flex: 30,
-              alignItems: 'center',
-              marginTop: 24,
-              marginBottom: 14,
-            }}>
-            <Text
-              style={{
-                fontSize: 30,
-                fontWeight: 30,
-                color: colors.black,
-              }}>
-              İkinci Yarımil BSQ
-            </Text>
-            <View style={{flexDirection: 'row', gap: 1.5}}>
-              <View
+            <View style={{flex: 30, alignItems: 'center', marginTop: 24}}>
+              <Text
                 style={{
-                  width: 207,
-                  height: 46,
-                  backgroundColor:
-                    isCheckedIY === false
-                      ? colors.gray
+                  fontSize: 30,
+                  lineHeight: 30,
+                  color: colors.black,
+                }}>
+                Birinci Yarımil BSQ
+              </Text>
+              <View style={{flexDirection: 'row', gap: 1.5, marginBottom: 14}}>
+                <View
+                  style={{
+                    width: 207,
+                    height: 46,
+                    backgroundColor:
+                      isCheckedB === false
+                        ? colors.blue
+                        : isCheckedIY === true
+                        ? colors.blue
+                        : colors.gray,
+                    borderRadius: 15,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontHeight: 20,
+                      color: colors.black,
+                    }}>
+                    {isCheckedIY === true
+                      ? 'Birinci yarımil:'
                       : isCheckedB === true
-                      ? colors.gray
-                      : colors.blue,
-                  borderRadius: 15,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontHeight: 20,
-                    color: colors.black,
-                  }}>
-                  {isCheckedIY === false
-                    ? 'BSQ'
-                    : isCheckedB === true
-                    ? 'BSQ'
-                    : 'BSQ:'}
-                </Text>
-                {isCheckedIY === false ? (
-                  <></>
-                ) : isCheckedB === true ? (
-                  <></>
-                ) : (
-                  <TextInput
-                    style={{
-                      width: 48,
-                      marginLeft: 3,
-                      fontSize: 20,
-                    }}
-                    placeholder="0"
-                    keyboardType="numeric"
-                    onChangeText={text => {
-                      inputTextBottomBSQ = text;
-                    }}
-                  />
-                )}
+                      ? 'BSQ'
+                      : 'BSQ:'}
+                  </Text>
+                  {isCheckedIY === true ? (
+                    <TextInput
+                      style={{
+                        width: 48,
+                        marginLeft: 3,
+                        fontSize: 20,
+                      }}
+                      placeholder="0"
+                      keyboardType="numeric"
+                      onChangeText={text => {
+                        setInputTextTopBSQ(text);
+                      }}
+                    />
+                  ) : isCheckedB === true ? (
+                    <></>
+                  ) : (
+                    <TextInput
+                      style={{
+                        width: 48,
+                        marginLeft: 3,
+                        fontSize: 20,
+                      }}
+                      placeholder="0"
+                      keyboardType="numeric"
+                      onChangeText={text => {
+                        setInputTextTopBSQ(text);
+                      }}
+                    />
+                  )}
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>
-        <View style={{flex: 25}}>
-          <View
-            style={{
-              flex: 28,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-            }}>
-            <YearlyPriceHesabla
-              isCheckedIY={isCheckedIY}
-              isCheckedB={isCheckedB}
-              inputTextTopKSQ={inputTextTopKSQ}
-              inputTextBottomKSQ={inputTextBottomKSQ}
-              inputTextBottomBSQ={inputTextBottomBSQ}
-              inputTextTopBSQ={inputTextTopBSQ}
-            />
-          </View>
-          <View
-            style={{
-              flex: 72,
-              flexDirection: 'row',
-              marginTop: 20,
-              justifyContent: 'center',
-              marginBottom: 10,
-              gap: 25,
-            }}>
-            <TouchableOpacity
-              style={{flexDirection: 'row', gap: 5}}
-              onPress={() => {
-                isCheckedIY === true
-                  ? setIsCheckedIY(false)
-                  : setIsCheckedIY(true);
+          <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>
+          <View style={{flex: 37}}>
+            <View style={{flex: 70, alignItems: 'center'}}>
+              <Text
+                style={{
+                  fontSize: 30,
+                  fontWeight: 30,
+                  color: colors.black,
+                }}>
+                İkinci Yarımil KSQ
+              </Text>
+              <Input_Bottom />
+            </View>
+            <View
+              style={{
+                flex: 30,
+                alignItems: 'center',
+                marginTop: 24,
+                marginBottom: 14,
               }}>
               <Text
                 style={{
-                  fontWeight: 400,
-                  fontSize: 20,
-                  lineHeight: 20,
+                  fontSize: 30,
+                  fontWeight: 30,
                   color: colors.black,
                 }}>
-                İkinci Yarımil
+                İkinci Yarımil BSQ
               </Text>
-
-              <Icon
-                name={isCheckedIY === true ? 'checkbox_true' : 'checkbox_false'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{flexDirection: 'row', gap: 5}}
-              onPress={() => {
-                isCheckedB === true
-                  ? setIsCheckedB(false)
-                  : setIsCheckedB(true);
-              }}>
-              <Text
-                style={{
-                  fontWeight: 400,
-                  fontSize: 20,
-                  lineHeight: 20,
-                  color: colors.black,
-                }}>
-                BSQ yoxdur
-              </Text>
-
-              <Icon
-                name={isCheckedB === true ? 'checkbox_true' : 'checkbox_false'}
-              />
-            </TouchableOpacity>
+              <View style={{flexDirection: 'row', gap: 1.5}}>
+                <View
+                  style={{
+                    width: 207,
+                    height: 46,
+                    backgroundColor:
+                      isCheckedIY === false
+                        ? colors.gray
+                        : isCheckedB === true
+                        ? colors.gray
+                        : colors.blue,
+                    borderRadius: 15,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontHeight: 20,
+                      color: colors.black,
+                    }}>
+                    {isCheckedIY === false
+                      ? 'BSQ'
+                      : isCheckedB === true
+                      ? 'BSQ'
+                      : 'BSQ:'}
+                  </Text>
+                  {isCheckedIY === false ? (
+                    <></>
+                  ) : isCheckedB === true ? (
+                    <></>
+                  ) : (
+                    <TextInput
+                      style={{
+                        width: 48,
+                        marginLeft: 3,
+                        fontSize: 20,
+                      }}
+                      placeholder="0"
+                      keyboardType="numeric"
+                      onChangeText={text => {
+                        setInputTextBottomBSQ(text);
+                      }}
+                    />
+                  )}
+                </View>
+              </View>
+            </View>
           </View>
-        </View>
-      </KeyboardAwareScrollView>
+          <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>
+          <View style={{flex: 25}}>
+            <View
+              style={{
+                flex: 28,
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+              }}>
+              <YearlyPriceHesabla
+                isCheckedIY={isCheckedIY}
+                isCheckedB={isCheckedB}
+                inputTextTopKSQ={inputTextTopKSQ}
+                inputTextBottomKSQ={inputTextBottomKSQ}
+                inputTextBottomBSQ={inputTextBottomBSQ}
+                inputTextTopBSQ={inputTextTopBSQ}
+              />
+            </View>
+            <View
+              style={{
+                flex: 72,
+                flexDirection: 'row',
+                marginTop: 20,
+                justifyContent: 'center',
+                marginBottom: 10,
+                gap: 25,
+              }}>
+              <TouchableOpacity
+                style={{flexDirection: 'row', gap: 5}}
+                onPress={() => {
+                  isCheckedIY === true
+                    ? setIsCheckedIY(false)
+                    : setIsCheckedIY(true);
+                }}>
+                <Text
+                  style={{
+                    fontWeight: 400,
+                    fontSize: 20,
+                    lineHeight: 20,
+                    color: colors.black,
+                  }}>
+                  İkinci Yarımil
+                </Text>
+
+                <Icon
+                  name={
+                    isCheckedIY === true ? 'checkbox_true' : 'checkbox_false'
+                  }
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{flexDirection: 'row', gap: 5}}
+                onPress={() => {
+                  isCheckedB
+                    ? isCheckedIY
+                      ? (setIsCheckedB(false), setInputTextBottomBSQ('0'))
+                      : (setIsCheckedB(false),
+                        setInputTextTopBSQ('0'),
+                        setInputTextBottomBSQ('0'))
+                    : setIsCheckedB(true);
+                }}>
+                <Text
+                  style={{
+                    fontWeight: 400,
+                    fontSize: 20,
+                    lineHeight: 20,
+                    color: colors.black,
+                  }}>
+                  BSQ yoxdur
+                </Text>
+
+                <Icon
+                  name={
+                    isCheckedB === true ? 'checkbox_true' : 'checkbox_false'
+                  }
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAwareScrollView>
+      </ScrollView>
+      <View style={{height: 100}}></View>
       <Footer />
     </View>
   );
