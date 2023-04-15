@@ -52,7 +52,15 @@ const YearlyPriceHesabla = ({
   };
 
   const handlePress = () => {
+    if (inputTextTopBSQ[0] == '') {
+      inputTextTopBSQ[0] = '0';
+    }
+    if (inputTextBottomBSQ[0] == '') {
+      inputTextBottomBSQ[0] = '0';
+    }
     console.log(inputTextTopBSQ);
+    console.log(inputTextBottomBSQ);
+    console.log('');
     if (isCheckedIY) {
       if (isCheckedB) {
         inputTextBottomKSQ.map(value => {

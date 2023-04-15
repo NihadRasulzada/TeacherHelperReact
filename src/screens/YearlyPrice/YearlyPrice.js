@@ -21,8 +21,72 @@ const YearlyPrice = () => {
   const [isCheckedB, setIsCheckedB] = useState(false);
   let inputTextTopKSQ = ['0', '0', '0', '0', '0', '0'];
   let inputTextBottomKSQ = ['0', '0', '0', '0', '0', '0'];
-  const [inputTextBottomBSQ, setInputTextBottomBSQ] = useState('0');
-  const [inputTextTopBSQ, setInputTextTopBSQ] = useState('0');
+  let inputTextBottomBSQ = ['0'];
+  let inputTextTopBSQ = ['0'];
+
+  const BYIBSQ = () => {
+    return (
+      <View style={{flexDirection: 'row', gap: 1.5, marginBottom: 14}}>
+        <View
+          style={{
+            width: 207,
+            height: 46,
+            backgroundColor:
+              isCheckedB === false
+                ? colors.blue
+                : isCheckedIY === true
+                ? colors.blue
+                : colors.gray,
+            borderRadius: 15,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontHeight: 20,
+              color: colors.black,
+            }}>
+            {isCheckedIY === true
+              ? 'Birinci yarımil:'
+              : isCheckedB === true
+              ? 'BSQ'
+              : 'BSQ:'}
+          </Text>
+          {isCheckedIY === true ? (
+            <TextInput
+              style={{
+                width: 48,
+                marginLeft: 3,
+                fontSize: 20,
+              }}
+              placeholder="0"
+              keyboardType="numeric"
+              onChangeText={text => {
+                inputTextTopBSQ[0] = text;
+              }}
+            />
+          ) : isCheckedB === true ? (
+            <></>
+          ) : (
+            <TextInput
+              style={{
+                width: 48,
+                marginLeft: 3,
+                fontSize: 20,
+              }}
+              placeholder="0"
+              keyboardType="numeric"
+              onChangeText={text => {
+                inputTextTopBSQ[0] = text;
+              }}
+            />
+          )}
+        </View>
+      </View>
+    );
+  };
 
   const Input_Top = () => {
     const [visibilityBackgroundColor, setVisibilityBackgroundColor] = useState([
@@ -861,65 +925,7 @@ const YearlyPrice = () => {
                 }}>
                 Birinci Yarımil BSQ
               </Text>
-              <View style={{flexDirection: 'row', gap: 1.5, marginBottom: 14}}>
-                <View
-                  style={{
-                    width: 207,
-                    height: 46,
-                    backgroundColor:
-                      isCheckedB === false
-                        ? colors.blue
-                        : isCheckedIY === true
-                        ? colors.blue
-                        : colors.gray,
-                    borderRadius: 15,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontHeight: 20,
-                      color: colors.black,
-                    }}>
-                    {isCheckedIY === true
-                      ? 'Birinci yarımil:'
-                      : isCheckedB === true
-                      ? 'BSQ'
-                      : 'BSQ:'}
-                  </Text>
-                  {isCheckedIY === true ? (
-                    <TextInput
-                      style={{
-                        width: 48,
-                        marginLeft: 3,
-                        fontSize: 20,
-                      }}
-                      placeholder="0"
-                      keyboardType="numeric"
-                      onChangeText={text => {
-                        setInputTextTopBSQ(text);
-                      }}
-                    />
-                  ) : isCheckedB === true ? (
-                    <></>
-                  ) : (
-                    <TextInput
-                      style={{
-                        width: 48,
-                        marginLeft: 3,
-                        fontSize: 20,
-                      }}
-                      placeholder="0"
-                      keyboardType="numeric"
-                      onChangeText={text => {
-                        setInputTextTopBSQ(text);
-                      }}
-                    />
-                  )}
-                </View>
-              </View>
+              <BYIBSQ />
             </View>
           </View>
           <View style={{borderWidth: 1, marginLeft: 7, marginRight: 7}}></View>
@@ -992,7 +998,7 @@ const YearlyPrice = () => {
                       placeholder="0"
                       keyboardType="numeric"
                       onChangeText={text => {
-                        setInputTextBottomBSQ(text);
+                        inputTextBottomBSQ[0] = text;
                       }}
                     />
                   )}
@@ -1054,10 +1060,10 @@ const YearlyPrice = () => {
                 onPress={() => {
                   isCheckedB
                     ? isCheckedIY
-                      ? (setIsCheckedB(false), setInputTextBottomBSQ('0'))
+                      ? (setIsCheckedB(false), (inputTextBottomBSQ[0] = '0'))
                       : (setIsCheckedB(false),
-                        setInputTextTopBSQ('0'),
-                        setInputTextBottomBSQ('0'))
+                        (inputTextTopBSQ[0] = '0'),
+                        (inputTextBottomBSQ[0] = '0'))
                     : setIsCheckedB(true);
                 }}>
                 <Text
