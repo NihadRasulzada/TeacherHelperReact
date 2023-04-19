@@ -5,234 +5,487 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
-import Button from '../../controllers/Button/Button';
+import React, {useEffect, useRef, useState, useMemo} from 'react';
 import {colors} from '../../config/colors';
 import Footer from '../../controllers/Footer/Footer';
 import InputLabel from '../../controllers/Label/InputLabel';
 import {strings} from '../../config/string';
+import SalaryHesabla from './SalaryHesabla';
+import {Data} from './Data';
 
 const Salary = () => {
-  const [switchValueSR, setSwitchValueSR] = useState(true);
-  const [switchValueT, setSwitchValueT] = useState(true);
-  const [switchValueS, setSwitchValueS] = useState(false);
-
   const SwitchSelectorSR = () => {
-    if (switchValueSR === true) {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueSR(false);
-          }}
+    const [switchValueSR, setSwitchValueSR] = useState(Data.switchValueSR);
+
+    useEffect(() => {
+      SwitchSelectorSROnPress;
+    }, [switchValueSR]);
+
+    const SwitchSelectorSROnPress = () => {
+      if (Data.switchValueSR === true) {
+        Data.switchValueSR = false;
+        setSwitchValueSR(false);
+      } else {
+        Data.switchValueSR = true;
+        setSwitchValueSR(true);
+      }
+    };
+
+    return (
+      <TouchableOpacity
+        onPress={SwitchSelectorSROnPress}
+        style={{
+          width: 64,
+          height: 36,
+          backgroundColor: switchValueSR ? colors.blue : colors.white,
+          borderRadius: 35,
+          alignItems: switchValueSR ? 'flex-end' : 'flex-start',
+        }}>
+        <View
           style={{
-            width: 64,
+            width: 36,
             height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-end',
+            backgroundColor: colors.white,
+            borderRadius: 36,
+            borderWidth: 3,
+            borderColor: colors.orange,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-          <View
+          <Text
             style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
-              borderColor: colors.orange,
-              alignItems: 'center',
-              justifyContent: 'center',
+              fontSize: 14,
+              lineHeight: 17,
+              color: colors.black,
             }}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 17,
-                color: colors.black,
-              }}>
-              {strings.yes}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueSR(true);
-          }}
-          style={{
-            width: 64,
-            height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-start',
-          }}>
-          <View
-            style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
-              borderColor: colors.orange,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 17,
-                color: colors.black,
-              }}>
-              {strings.no}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
+            {switchValueSR ? strings.yes : strings.no}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
   };
   const SwitchSelectorT = () => {
-    if (switchValueT === true) {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueT(false);
-          }}
+    const [switchValueT, setSwitchValueT] = useState(Data.switchValueT);
+
+    useEffect(() => {
+      SwitchSelectorTOnPress;
+    }, [switchValueT]);
+
+    const SwitchSelectorTOnPress = () => {
+      if (Data.switchValueT === true) {
+        Data.switchValueT = false;
+        setSwitchValueT(false);
+      } else {
+        Data.switchValueT = true;
+        setSwitchValueT(true);
+      }
+    };
+
+    return (
+      <TouchableOpacity
+        onPress={SwitchSelectorTOnPress}
+        style={{
+          width: 64,
+          height: 36,
+          backgroundColor: switchValueT ? colors.blue : colors.white,
+          borderRadius: 35,
+          alignItems: switchValueT ? 'flex-end' : 'flex-start',
+        }}>
+        <View
           style={{
-            width: 64,
+            width: 36,
             height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-end',
+            backgroundColor: colors.white,
+            borderRadius: 36,
+            borderWidth: 3,
+            borderColor: colors.orange,
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
+          <Text
+            style={{
+              fontSize: 14,
+              lineHeight: 17,
+              color: colors.black,
+            }}>
+            {switchValueT ? strings.ali : strings.orta}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+  const SwitchSelectorSTrueFalse = () => {
+    if (Data.switchValueS === true) {
+      return (
+        <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
           <View
             style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
-              borderColor: colors.orange,
-              alignItems: 'center',
-              justifyContent: 'center',
+              width: '57%',
+              height: 52,
             }}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 17,
-                color: colors.black,
-              }}>
-              {strings.ali}
-            </Text>
+            <InputLabel Name="Sertfikasiyanız balınız" />
           </View>
-        </TouchableOpacity>
+          <View
+            style={{
+              width: '18%',
+              height: 52,
+              justifyContent: 'flex-end',
+            }}>
+            <TextInput
+              style={{
+                borderBottomWidth: 1,
+                fontSize: 20,
+                borderColor: colors.blue,
+              }}
+              placeholder="0"
+              keyboardType="numeric"
+              onChangeText={text => {
+                if (text == '') {
+                  Data.sbtxt = '0';
+                } else {
+                  Data.sbtxt = text;
+                }
+              }}></TextInput>
+          </View>
+        </View>
       );
     } else {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueT(true);
-          }}
-          style={{
-            width: 64,
-            height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-start',
-          }}>
-          <View
-            style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
-              borderColor: colors.orange,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 14,
-                lineHeight: 17,
-                color: colors.black,
-              }}>
-              {strings.orta}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      );
+      return <></>;
     }
   };
   const SwitchSelectorS = () => {
-    if (switchValueS === true) {
-      return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueS(false);
-          }}
-          style={{
-            width: 64,
-            height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-end',
-          }}>
+    const [switchValueS, setSwitchValueS] = useState(Data.switchValueS);
+
+    useEffect(() => {
+      SwitchSelectorSOnPress;
+    }, [switchValueS]);
+
+    const SwitchSelectorSOnPress = () => {
+      if (Data.switchValueS === true) {
+        Data.switchValueS = false;
+        setSwitchValueS(false);
+      } else {
+        Data.switchValueS = true;
+        Data.sbtxt = '0';
+        setSwitchValueS(true);
+      }
+    };
+
+    return (
+      <View>
+        <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
           <View
             style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
+              width: '61%',
+              height: 52,
+            }}>
+            <InputLabel Name="Sertfikasiyanız var?" />
+          </View>
+          <View
+            style={{
+              width: '18%',
+              height: 52,
+              justifyContent: 'flex-end',
+            }}>
+            <TouchableOpacity
+              onPress={SwitchSelectorSOnPress}
+              style={{
+                width: 64,
+                height: 36,
+                backgroundColor: switchValueS ? colors.blue : colors.white,
+                borderRadius: 35,
+                alignItems: switchValueS ? 'flex-end' : 'flex-start',
+              }}>
+              <View
+                style={{
+                  width: 36,
+                  height: 36,
+                  backgroundColor: colors.white,
+                  borderRadius: 36,
+                  borderWidth: 3,
+                  borderColor: colors.orange,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    lineHeight: 17,
+                    color: colors.black,
+                  }}>
+                  {switchValueS ? strings.yes : strings.no}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <SwitchSelectorSTrueFalse />
+      </View>
+    );
+  };
+  const SwitchSelectorH = () => {
+    const [switchValueH, setSwitchValueH] = useState(Data.switchValueH);
+
+    if (switchValueH === 0) {
+      return (
+        <View
+          style={{
+            height: 41,
+            width: 143,
+            flexDirection: 'row',
+          }}>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderLeftWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
               borderColor: colors.orange,
+              borderTopLeftRadius: 15,
+              borderBottomLeftRadius: 15,
               alignItems: 'center',
               justifyContent: 'center',
+              backgroundColor: colors.blue,
+            }}
+            onPress={() => {
+              Data.switchValueH = 0;
+              setSwitchValueH(0);
             }}>
             <Text
               style={{
-                fontSize: 14,
-                lineHeight: 17,
+                fontSize: 16,
+                lineHeight: 19,
                 color: colors.black,
               }}>
-              {strings.yes}
+              Yox
             </Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 1;
+              setSwitchValueH(1);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H1
+            </Text>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderRightWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              borderTopRightRadius: 15,
+              borderBottomRightRadius: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 2;
+              setSwitchValueH(2);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H2
+            </Text>
+          </TouchableOpacity>
+        </View>
       );
-    } else {
+    } else if (switchValueH === 1) {
       return (
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchValueS(true);
-          }}
+        <View
           style={{
-            width: 64,
-            height: 36,
-            backgroundColor: colors.blue,
-            borderRadius: 35,
-            alignItems: 'flex-start',
+            height: 41,
+            width: 143,
+            flexDirection: 'row',
           }}>
-          <View
+          <TouchableOpacity
             style={{
-              width: 36,
-              height: 36,
-              backgroundColor: colors.white,
-              borderRadius: 36,
-              borderWidth: 3,
+              flex: 45,
+              borderLeftWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
               borderColor: colors.orange,
+              borderTopLeftRadius: 15,
+              borderBottomLeftRadius: 15,
               alignItems: 'center',
               justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 0;
+              setSwitchValueH(0);
             }}>
             <Text
               style={{
-                fontSize: 14,
-                lineHeight: 17,
+                fontSize: 16,
+                lineHeight: 19,
                 color: colors.black,
               }}>
-              {strings.no}
+              Yox
             </Text>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.blue,
+            }}
+            onPress={() => {
+              Data.switchValueH = 1;
+              setSwitchValueH(1);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H1
+            </Text>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderRightWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              borderTopRightRadius: 15,
+              borderBottomRightRadius: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 2;
+              setSwitchValueH(2);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H2
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (switchValueH === 2) {
+      return (
+        <View
+          style={{
+            height: 41,
+            width: 143,
+            flexDirection: 'row',
+          }}>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderLeftWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              borderTopLeftRadius: 15,
+              borderBottomLeftRadius: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 0;
+              setSwitchValueH(0);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              Yox
+            </Text>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.white,
+            }}
+            onPress={() => {
+              Data.switchValueH = 1;
+              setSwitchValueH(1);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H1
+            </Text>
+          </TouchableOpacity>
+          <View style={{flex: 3, backgroundColor: colors.orange}}></View>
+          <TouchableOpacity
+            style={{
+              flex: 45,
+              borderRightWidth: 3,
+              borderTopWidth: 3,
+              borderBottomWidth: 3,
+              borderColor: colors.orange,
+              borderTopRightRadius: 15,
+              borderBottomRightRadius: 15,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.blue,
+            }}
+            onPress={() => {
+              Data.switchValueH = 2;
+              setSwitchValueH(2);
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                lineHeight: 19,
+                color: colors.black,
+              }}>
+              H2
+            </Text>
+          </TouchableOpacity>
+        </View>
       );
     }
   };
@@ -268,7 +521,17 @@ const Salary = () => {
                     borderBottomWidth: 1,
                     fontSize: 20,
                     borderColor: colors.blue,
-                  }}></TextInput>
+                  }}
+                  placeholder="0"
+                  keyboardType="numeric"
+                  onChangeText={text => {
+                    if (text == '') {
+                      Data.stxt = '0';
+                    } else {
+                      Data.stxt = text;
+                    }
+                  }}
+                />
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
@@ -282,7 +545,7 @@ const Salary = () => {
                   justifyContent: 'center',
                   alignItems: 'flex-start',
                 }}>
-                {SwitchSelectorSR()}
+                <SwitchSelectorSR />
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
@@ -295,7 +558,7 @@ const Salary = () => {
                   height: 52,
                   justifyContent: 'flex-end',
                 }}>
-                {SwitchSelectorT()}
+                <SwitchSelectorT />
               </View>
             </View>
             <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
@@ -317,6 +580,15 @@ const Salary = () => {
                     borderBottomWidth: 1,
                     fontSize: 20,
                     borderColor: colors.blue,
+                  }}
+                  placeholder="0"
+                  keyboardType="numeric"
+                  onChangeText={text => {
+                    if (text == '') {
+                      Data.lstxt = '0';
+                    } else {
+                      Data.lstxt = text;
+                    }
                   }}></TextInput>
               </View>
             </View>
@@ -339,6 +611,15 @@ const Salary = () => {
                     borderBottomWidth: 1,
                     fontSize: 20,
                     borderColor: colors.blue,
+                  }}
+                  placeholder="0"
+                  keyboardType="numeric"
+                  onChangeText={text => {
+                    if (text == '') {
+                      Data.astxt = '0';
+                    } else {
+                      Data.astxt = text;
+                    }
                   }}></TextInput>
               </View>
             </View>
@@ -361,6 +642,15 @@ const Salary = () => {
                     borderBottomWidth: 1,
                     fontSize: 20,
                     borderColor: colors.blue,
+                  }}
+                  placeholder="0"
+                  keyboardType="numeric"
+                  onChangeText={text => {
+                    if (text == '') {
+                      Data.estxt = '0';
+                    } else {
+                      Data.estxt = text;
+                    }
                   }}></TextInput>
               </View>
             </View>
@@ -372,59 +662,11 @@ const Salary = () => {
                 }}>
                 <InputLabel Name="Həvəsləndirmə" />
               </View>
-              <View
-                style={{width: '18%', height: 52, justifyContent: 'flex-end'}}>
-                <TextInput
-                  style={{
-                    borderBottomWidth: 1,
-                    fontSize: 20,
-                    borderColor: colors.blue,
-                  }}></TextInput>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <SwitchSelectorH />
               </View>
             </View>
-            <View style={{flexDirection: 'row', gap: 25, marginTop: 25}}>
-              <View
-                style={{
-                  width: '61%',
-                  height: 52,
-                }}>
-                <InputLabel Name="Sertfikasiyanız var?" />
-              </View>
-              <View
-                style={{
-                  width: '18%',
-                  height: 52,
-                  justifyContent: 'flex-end',
-                }}>
-                {SwitchSelectorS()}
-              </View>
-            </View>
-            {switchValueS === true ? (
-              <View style={{flexDirection: 'row', gap: 30, marginTop: 25}}>
-                <View
-                  style={{
-                    width: '57%',
-                    height: 52,
-                  }}>
-                  <InputLabel Name="Sertfikasiyanız balınız" />
-                </View>
-                <View
-                  style={{
-                    width: '18%',
-                    height: 52,
-                    justifyContent: 'flex-end',
-                  }}>
-                  <TextInput
-                    style={{
-                      borderBottomWidth: 1,
-                      fontSize: 20,
-                      borderColor: colors.blue,
-                    }}></TextInput>
-                </View>
-              </View>
-            ) : (
-              <></>
-            )}
+            <SwitchSelectorS />
           </ScrollView>
         </View>
       </View>
@@ -434,22 +676,7 @@ const Salary = () => {
           top: 0,
           alignItems: 'center',
         }}>
-        <Button
-          width={'59%'}
-          height={'35%'}
-          borderWidth={4}
-          borderColor={colors.blue}
-          borderTopLeftRadius={50}
-          borderTopRightRadius={50}
-          borderBottomLeftRadius={50}
-          borderBottomRightRadius={50}
-          backgroundColor={colors.orange}
-          fontWeight={400}
-          fontSize={32}
-          lineHeight={39}
-          color={colors.white}
-          name="HESABLA"
-        />
+        <SalaryHesabla />
       </View>
       <Footer />
     </View>

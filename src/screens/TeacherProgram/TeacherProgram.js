@@ -34,6 +34,7 @@ const TeacherProgram = () => {
           Səhifə hazırlanma ərəfəsindədir. Bu səhifə müəllimlərin illik dərs
           cədvəlini planlamasına kömək üçün nəzərdə tutulur.
         </Text>
+        
       </View>
       <Footer />
     </View>
