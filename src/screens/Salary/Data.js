@@ -1,5 +1,5 @@
 export const Data = {
-  switchValueSR: true,
+  switchValueSR: false,
   switchValueT: true,
   switchValueS: false,
   switchValueH: 0,
@@ -9,3 +9,5 @@ export const Data = {
   estxt: '0',
   sbtxt: '0',
 };
+export const Ali = {stavka: [607, 653, 686, 732, 785]};
+export const Orta = {stavka: [554, 587, 607, 647, 699]};

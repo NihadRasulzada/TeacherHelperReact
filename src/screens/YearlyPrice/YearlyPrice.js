@@ -3,16 +3,12 @@ import {
   View,
   Text,
   TextInput,
-  StyleSheet,
-  Modal,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
 import Icon from '../../controllers/Icon/Icon';
-import Button from '../../controllers/Button/Button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {strings} from '../../config/string';
 import YearlyPriceHesabla from './YearlyPriceHesabla';
 import {ScrollView} from 'react-native-gesture-handler';
 
@@ -896,8 +892,8 @@ const YearlyPrice = () => {
 
   return (
     <View style={{flex: 1}}>
-      <ScrollView>
-        <KeyboardAwareScrollView style={{paddingBottom: '12%'}}>
+      <ScrollView style={{width: '100%'}}>
+        <KeyboardAwareScrollView>
           <View style={{flex: 38}}>
             <View
               style={{
@@ -1086,7 +1082,6 @@ const YearlyPrice = () => {
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>
-      <View style={{height: 100}}></View>
       <Footer />
     </View>
   );

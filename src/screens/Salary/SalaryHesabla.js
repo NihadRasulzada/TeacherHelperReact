@@ -2,9 +2,7 @@ import {View, Text, Modal, StyleSheet, TouchableOpacity} from 'react-native';
 import Button from '../../controllers/Button/Button';
 import React, {useState} from 'react';
 import {colors} from '../../config/colors';
-import {Data} from './Data';
-import {strings} from '../../config/string';
-import {Ali} from './Ali';
+import {Ali, Data, Orta} from './Data';
 
 const SalaryHesabla = () => {
   const [HesablaDialogVisible, setHesablaDialogVisible] = useState(false);
