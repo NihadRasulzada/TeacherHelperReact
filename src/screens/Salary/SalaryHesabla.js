@@ -46,17 +46,6 @@ const SalaryHesabla = () => {
   };
 
   const handlePress = () => {
-    /*console.log('switchValueSR', Data.switchValueSR);
-    console.log('switchValueT', Data.switchValueT);
-    console.log('switchValueS', Data.switchValueS);
-    console.log('switchValueH', Data.switchValueH);
-    console.log('stxt', Data.stxt);
-    console.log('lstxt', Data.lstxt);
-    console.log('astxt', Data.astxt);
-    console.log('estxt', Data.estxt);
-    console.log('sbtxt', Data.sbtxt);
-    console.log();*/
-
     if (Data.switchValueSR == true) {
       SRtxt = 40;
     } else {

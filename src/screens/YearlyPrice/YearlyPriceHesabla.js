@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import Button from '../../controllers/Button/Button';
 import {colors} from '../../config/colors';
 import {strings} from '../../config/string';
+import {Data} from './Data';
 
 const YearlyPriceHesabla = ({
   isCheckedIY,
@@ -52,6 +53,10 @@ const YearlyPriceHesabla = ({
   };
 
   const handlePress = () => {
+    console.log('inputTextTopKSQ', Data.inputTextTopKSQ);
+    console.log('inputTextBottomKSQ', Data.inputTextBottomKSQ);
+    console.log('inputTextBottomBSQ', Data.inputTextBottomBSQ);
+    console.log('inputTextTopBSQ', Data.inputTextTopBSQ);
     if (inputTextTopBSQ[0] == '') {
       inputTextTopBSQ[0] = '0';
     }

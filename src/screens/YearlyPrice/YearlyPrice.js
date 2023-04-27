@@ -1,9 +1,4 @@
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  TextInput,
-} from 'react-native';
+import {TouchableOpacity, View, Text, TextInput} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
@@ -11,14 +6,11 @@ import Icon from '../../controllers/Icon/Icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import YearlyPriceHesabla from './YearlyPriceHesabla';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Data} from './Data';
 
 const YearlyPrice = () => {
   const [isCheckedIY, setIsCheckedIY] = useState(false);
   const [isCheckedB, setIsCheckedB] = useState(false);
-  let inputTextTopKSQ = ['0', '0', '0', '0', '0', '0'];
-  let inputTextBottomKSQ = ['0', '0', '0', '0', '0', '0'];
-  let inputTextBottomBSQ = ['0'];
-  let inputTextTopBSQ = ['0'];
 
   const BYIBSQ = () => {
     return (
@@ -60,7 +52,7 @@ const YearlyPrice = () => {
               placeholder="0"
               keyboardType="numeric"
               onChangeText={text => {
-                inputTextTopBSQ[0] = text;
+                Data.inputTextTopBSQ[0] = text;
               }}
             />
           ) : isCheckedB === true ? (
@@ -75,7 +67,7 @@ const YearlyPrice = () => {
               placeholder="0"
               keyboardType="numeric"
               onChangeText={text => {
-                inputTextTopBSQ[0] = text;
+                Data.inputTextTopBSQ[0] = text;
               }}
             />
           )}
@@ -143,7 +135,7 @@ const YearlyPrice = () => {
           setIconName(newarr);
         };
         fiw();
-        inputTextTopKSQ[i] = '';
+        Data.inputTextTopKSQ[i] = '';
       } else {
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.blue;
@@ -166,7 +158,7 @@ const YearlyPrice = () => {
           setIconName(newarr);
         };
         fiw();
-        inputTextTopKSQ[i] = '0';
+        Data.inputTextTopKSQ[i] = '0';
       }
     };
 
@@ -230,11 +222,14 @@ const YearlyPrice = () => {
                     keyboardType="numeric"
                     placeholder="0"
                     onChangeText={text => {
-                      inputTextTopKSQ[0] = text;
+                      Data.inputTextTopKSQ[0] = text;
+                      if (Data.inputTextTopKSQ[0] == '') {
+                        Data.inputTextTopKSQ[0] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[0] = '')}</>
+                  <>{(Data.inputTextTopKSQ[0] = '')}</>
                 )}
               </View>
             </View>
@@ -280,11 +275,14 @@ const YearlyPrice = () => {
                     keyboardType="numeric"
                     placeholder="0"
                     onChangeText={text => {
-                      inputTextTopKSQ[1] = text;
+                      Data.inputTextTopKSQ[1] = text;
+                      if (Data.inputTextTopKSQ[1] == '') {
+                        Data.inputTextTopKSQ[1] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[1] = '')}</>
+                  <>{(Data.inputTextTopKSQ[1] = '')}</>
                 )}
               </View>
             </View>
@@ -330,11 +328,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextTopKSQ[2] = text;
+                      Data.inputTextTopKSQ[2] = text;
+                      if (Data.inputTextTopKSQ[2] == '') {
+                        Data.inputTextTopKSQ[2] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[2] = '')}</>
+                  <>{(Data.inputTextTopKSQ[2] = '')}</>
                 )}
               </View>
             </View>
@@ -372,11 +373,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextTopKSQ[3] = text;
+                      Data.inputTextTopKSQ[3] = text;
+                      if (Data.inputTextTopKSQ[3] == '') {
+                        Data.inputTextTopKSQ[3] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[3] = '')}</>
+                  <>{(Data.inputTextTopKSQ[3] = '')}</>
                 )}
               </View>
             </View>
@@ -422,11 +426,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextTopKSQ[4] = text;
+                      Data.inputTextTopKSQ[4] = text;
+                      if (Data.inputTextTopKSQ[4] == '') {
+                        Data.inputTextTopKSQ[4] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[4] = '')}</>
+                  <>{(Data.inputTextTopKSQ[4] = '')}</>
                 )}
               </View>
             </View>
@@ -472,11 +479,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextTopKSQ[5] = text;
+                      Data.inputTextTopKSQ[5] = text;
+                      if (Data.inputTextTopKSQ[5] == '') {
+                        Data.inputTextTopKSQ[5] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextTopKSQ[5] = '')}</>
+                  <>{(Data.inputTextTopKSQ[5] = '')}</>
                 )}
               </View>
             </View>
@@ -546,7 +556,7 @@ const YearlyPrice = () => {
         newarr[i] = 'increase';
         newarr[i + 1] = '';
         setIconName(newarr);
-        inputTextBottomKSQ[i] = '';
+        Data.inputTextBottomKSQ[i] = '';
       } else {
         let newarr = [...visibilityBackgroundColor];
         newarr[i] = colors.blue;
@@ -560,7 +570,7 @@ const YearlyPrice = () => {
         newarr[i] = 'decrease';
         newarr[i + 1] = 'increase';
         setIconName(newarr);
-        inputTextBottomKSQ[i] = '0';
+        Data.inputTextBottomKSQ[i] = '0';
       }
     };
 
@@ -624,11 +634,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[0] = text;
+                      Data.inputTextBottomKSQ[0] = text;
+                      if (Data.inputTextBottomKSQ[0] == '') {
+                        Data.inputTextBottomKSQ[0] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[0] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[0] = '')}</>
                 )}
               </View>
             </View>
@@ -674,11 +687,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[1] = text;
+                      Data.inputTextBottomKSQ[1] = text;
+                      if (Data.inputTextBottomKSQ[1] == '') {
+                        Data.inputTextBottomKSQ[1] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[1] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[1] = '')}</>
                 )}
               </View>
             </View>
@@ -724,11 +740,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[2] = text;
+                      Data.inputTextBottomKSQ[2] = text;
+                      if (Data.inputTextBottomKSQ[2] == '') {
+                        Data.inputTextBottomKSQ[2] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[2] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[2] = '')}</>
                 )}
               </View>
             </View>
@@ -766,11 +785,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[3] = text;
+                      Data.inputTextBottomKSQ[3] = text;
+                      if (Data.inputTextBottomKSQ[3] == '') {
+                        Data.inputTextBottomKSQ[3] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[3] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[3] = '')}</>
                 )}
               </View>
             </View>
@@ -816,11 +838,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[4] = text;
+                      Data.inputTextBottomKSQ[4] = text;
+                      if (Data.inputTextBottomKSQ[4] == '') {
+                        Data.inputTextBottomKSQ[4] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[4] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[4] = '')}</>
                 )}
               </View>
             </View>
@@ -866,11 +891,14 @@ const YearlyPrice = () => {
                     placeholder="0"
                     keyboardType="numeric"
                     onChangeText={text => {
-                      inputTextBottomKSQ[5] = text;
+                      Data.inputTextBottomKSQ[5] = text;
+                      if (Data.inputTextBottomKSQ[5] == '') {
+                        Data.inputTextBottomKSQ[5] = 0;
+                      }
                     }}
                   />
                 ) : (
-                  <>{(inputTextBottomKSQ[5] = '')}</>
+                  <>{(Data.inputTextBottomKSQ[5] = '')}</>
                 )}
               </View>
             </View>
@@ -994,7 +1022,7 @@ const YearlyPrice = () => {
                       placeholder="0"
                       keyboardType="numeric"
                       onChangeText={text => {
-                        inputTextBottomBSQ[0] = text;
+                        Data.inputTextBottomBSQ[0] = text;
                       }}
                     />
                   )}
@@ -1013,10 +1041,10 @@ const YearlyPrice = () => {
               <YearlyPriceHesabla
                 isCheckedIY={isCheckedIY}
                 isCheckedB={isCheckedB}
-                inputTextTopKSQ={inputTextTopKSQ}
-                inputTextBottomKSQ={inputTextBottomKSQ}
-                inputTextBottomBSQ={inputTextBottomBSQ}
-                inputTextTopBSQ={inputTextTopBSQ}
+                inputTextTopKSQ={Data.inputTextTopKSQ}
+                inputTextBottomKSQ={Data.inputTextBottomKSQ}
+                inputTextBottomBSQ={Data.inputTextBottomBSQ}
+                inputTextTopBSQ={Data.inputTextTopBSQ}
               />
             </View>
             <View
@@ -1032,8 +1060,19 @@ const YearlyPrice = () => {
                 style={{flexDirection: 'row', gap: 5}}
                 onPress={() => {
                   isCheckedIY === true
-                    ? setIsCheckedIY(false)
-                    : setIsCheckedIY(true);
+                    ? (setIsCheckedIY(false),
+                      (Data.inputTextTopKSQ = ['0', '0', '0', '0', '0', '0']),
+                      console.log(Data.inputTextTopKSQ))
+                    : (setIsCheckedIY(true),
+                      (Data.inputTextBottomKSQ = [
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                        '0',
+                      ]),
+                      console.log(Data.inputTextBottomKSQ));
                 }}>
                 <Text
                   style={{
@@ -1056,10 +1095,11 @@ const YearlyPrice = () => {
                 onPress={() => {
                   isCheckedB
                     ? isCheckedIY
-                      ? (setIsCheckedB(false), (inputTextBottomBSQ[0] = '0'))
+                      ? (setIsCheckedB(false),
+                        (Data.inputTextBottomBSQ[0] = '0'))
                       : (setIsCheckedB(false),
-                        (inputTextTopBSQ[0] = '0'),
-                        (inputTextBottomBSQ[0] = '0'))
+                        (Data.inputTextTopBSQ[0] = '0'),
+                        (Data.inputTextBottomBSQ[0] = '0'))
                     : setIsCheckedB(true);
                 }}>
                 <Text
