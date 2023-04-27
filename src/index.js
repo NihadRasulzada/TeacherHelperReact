@@ -6,12 +6,13 @@ import Salary from './screens/Salary/Salary';
 import YearlyPrice from './screens/YearlyPrice/YearlyPrice';
 import TeacherProgram from './screens/TeacherProgram/TeacherProgram';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {LogBox} from 'react-native';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   const [isSwitchEnabled, setSwitch] = useState(false);
-
+  LogBox.ignoreAllLogs();
   return (
     <NavigationContainer>
       <Stack.Navigator>
