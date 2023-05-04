@@ -72,29 +72,6 @@ const HiddenOrVisibleFooterLayoutButton = props => {
             name="İllik qiymət"
           />
         </View>
-        <View
-          style={{
-            width: '60%',
-            height: '15%',
-          }}>
-          <Button
-            width={'100%'}
-            height={'100%'}
-            borderWidth={5}
-            borderColor={colors.orange}
-            borderTopLeftRadius={25}
-            borderTopRightRadius={25}
-            borderBottomLeftRadius={25}
-            borderBottomRightRadius={25}
-            backgroundColor={colors.white}
-            fontWeight={400}
-            fontSize={30}
-            lineHeight={30}
-            color={colors.orange}
-            onPress={onTouchedtoTeacherProgram}
-            name="Dərs Planlaması"
-          />
-        </View>
       </View>
     );
   }

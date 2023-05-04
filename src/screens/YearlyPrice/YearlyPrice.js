@@ -1,11 +1,16 @@
-import {TouchableOpacity, View, Text, TextInput} from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Footer from '../../controllers/Footer/Footer';
 import {colors} from '../../config/colors';
 import Icon from '../../controllers/Icon/Icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import YearlyPriceHesabla from './YearlyPriceHesabla';
-import {ScrollView} from 'react-native-gesture-handler';
 import {Data} from './Data';
 
 const YearlyPrice = () => {
@@ -1122,6 +1127,7 @@ const YearlyPrice = () => {
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>
+      <View style={{height: 100}}></View>
       <Footer />
     </View>
   );

@@ -23,9 +23,27 @@ const YearlyPriceHesabla = ({
   const [IQDialogIY, setIQDialogIY] = useState('');
   const [IQDialogBY, setIQDialogBY] = useState('');
   const [BYDialogBY, setBYDialogBY] = useState('');
+  const [format, setFormat] = useState('');
 
   let isKSQ = false,
     isBSQ = false;
+
+  const Price = value => {
+    console.log(value);
+    if (0 <= value && value < 31) {
+      console.log(2);
+      return 2;
+    } else if (31 <= value && value < 61) {
+      console.log(3);
+      return 3;
+    } else if (61 <= value && value < 81) {
+      console.log(4);
+      return 4;
+    } else {
+      console.log(5);
+      return 5;
+    }
+  };
 
   const KSQ0DialogYes = () => {
     setKSQ0DialogVisible(false);
@@ -450,7 +468,7 @@ const YearlyPriceHesabla = ({
           <View style={styles.dialogContainer}>
             <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                Q / B
+                B / Q
               </Text>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
@@ -458,7 +476,7 @@ const YearlyPriceHesabla = ({
                 Birinci Yarımil:
               </Text>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                {BYDialogBY}
+                {BYDialogBY + '/' + Price(parseInt(BYDialogBY))}
               </Text>
             </View>
             <View
@@ -477,7 +495,10 @@ const YearlyPriceHesabla = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                onPress={onClose}>
+                onPress={() => {
+                  onClose();
+                  setFormat('');
+                }}>
                 <Text
                   style={{
                     fontSize: 28,
@@ -508,7 +529,7 @@ const YearlyPriceHesabla = ({
                 justifyContent: 'flex-end',
               }}>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                Q / B
+                B / Q
               </Text>
             </View>
             <View style={{flexDirection: 'row', gap: 10}}>
@@ -522,7 +543,7 @@ const YearlyPriceHesabla = ({
                     lineHeight: 30,
                     color: colors.black,
                   }}>
-                  {IQDialogBY}
+                  {IQDialogBY + '/' + Price(parseInt(IQDialogBY))}
                 </Text>
               </View>
             </View>
@@ -537,7 +558,7 @@ const YearlyPriceHesabla = ({
                     lineHeight: 30,
                     color: colors.black,
                   }}>
-                  {IQDialogIY}
+                  {IQDialogIY + '/' + Price(parseInt(IQDialogIY))}
                 </Text>
               </View>
             </View>
@@ -552,7 +573,7 @@ const YearlyPriceHesabla = ({
                   color: colors.black,
                   justifyContent: 'flex-end',
                 }}>
-                {IQDialogIQ}
+                {IQDialogIQ + '/' + Price(parseInt(IQDialogIQ))}
               </Text>
             </View>
             <View
@@ -571,7 +592,10 @@ const YearlyPriceHesabla = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                onPress={onClose}>
+                onPress={() => {
+                  onClose();
+                  setFormat('');
+                }}>
                 <Text
                   style={{
                     fontSize: 28,
