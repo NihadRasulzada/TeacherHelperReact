@@ -9,5 +9,5 @@ export const Data = {
   estxt: '0',
   sbtxt: '0',
 };
-export const Ali = {stavka: [607, 653, 686, 732, 785]};
-export const Orta = {stavka: [554, 587, 607, 647, 699]};
+export const Ali = {stavka: [607, 653, 686, 733, 785]};
+export const Orta = {stavka: [554, 587, 607, 647, 700]};

@@ -29,18 +29,13 @@ const YearlyPriceHesabla = ({
     isBSQ = false;
 
   const Price = value => {
-    console.log(value);
     if (0 <= value && value < 31) {
-      console.log(2);
       return 2;
     } else if (31 <= value && value < 61) {
-      console.log(3);
       return 3;
     } else if (61 <= value && value < 81) {
-      console.log(4);
       return 4;
     } else {
-      console.log(5);
       return 5;
     }
   };
@@ -71,19 +66,12 @@ const YearlyPriceHesabla = ({
   };
 
   const handlePress = () => {
-    console.log('inputTextTopKSQ', Data.inputTextTopKSQ);
-    console.log('inputTextBottomKSQ', Data.inputTextBottomKSQ);
-    console.log('inputTextBottomBSQ', Data.inputTextBottomBSQ);
-    console.log('inputTextTopBSQ', Data.inputTextTopBSQ);
     if (inputTextTopBSQ[0] == '') {
-      inputTextTopBSQ[0] = '0';
+      inputTextTopBSQ[0] = 0;
     }
     if (inputTextBottomBSQ[0] == '') {
-      inputTextBottomBSQ[0] = '0';
+      inputTextBottomBSQ[0] = 0;
     }
-    console.log(inputTextTopBSQ);
-    console.log(inputTextBottomBSQ);
-    console.log('');
     if (isCheckedIY) {
       if (isCheckedB) {
         inputTextBottomKSQ.map(value => {
@@ -95,10 +83,10 @@ const YearlyPriceHesabla = ({
           setKSQ0DialogVisible(true);
           for (let index = 0; index < 6; index++) {
             if (inputTextBottomKSQ[index] !== '') {
-              inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+              inputTextBottomKSQ[index] = parseFloat(inputTextBottomKSQ[index]);
             }
           }
-          setIQDialogBY(parseInt(inputTextTopBSQ));
+          setIQDialogBY(parseInt(parseFloat(inputTextTopBSQ) * 100) / 100);
           let say = 0;
           let cem = 0;
           for (let index = 0; index < 6; index++) {
@@ -107,16 +95,20 @@ const YearlyPriceHesabla = ({
               cem += inputTextBottomKSQ[index];
             }
           }
-          setIQDialogIY(cem / say);
-          setIQDialogIQ((parseInt(inputTextTopBSQ) + cem / say) / 2);
+          setIQDialogIY(parseInt((cem / say) * 100) / 100);
+          setIQDialogIQ(
+            parseInt(
+              (parseFloat(parseFloat(inputTextTopBSQ) + cem / say) / 2) * 100,
+            ) / 100,
+          );
         } else {
           setIQDialogVisible(true);
           for (let index = 0; index < 6; index++) {
             if (inputTextBottomKSQ[index] !== '') {
-              inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+              inputTextBottomKSQ[index] = parseFloat(inputTextBottomKSQ[index]);
             }
           }
-          setIQDialogBY(parseInt(inputTextTopBSQ));
+          setIQDialogBY(parseInt(parseFloat(inputTextTopBSQ) * 100) / 100);
           let say = 0;
           let cem = 0;
           for (let index = 0; index < 6; index++) {
@@ -125,8 +117,12 @@ const YearlyPriceHesabla = ({
               cem += inputTextBottomKSQ[index];
             }
           }
-          setIQDialogIY(cem / say);
-          setIQDialogIQ((parseInt(inputTextTopBSQ) + cem / say) / 2);
+          setIQDialogIY(parseInt((cem / say) * 100) / 100);
+          setIQDialogIQ(
+            parseInt(
+              (parseFloat(parseFloat(inputTextTopBSQ) + cem / say) / 2) * 100,
+            ) / 100,
+          );
         }
       } else {
         inputTextBottomKSQ.map(value => {
@@ -138,10 +134,10 @@ const YearlyPriceHesabla = ({
 
         for (let index = 0; index < 6; index++) {
           if (inputTextBottomKSQ[index] !== '') {
-            inputTextBottomKSQ[index] = parseInt(inputTextBottomKSQ[index]);
+            inputTextBottomKSQ[index] = parseFloat(inputTextBottomKSQ[index]);
           }
         }
-        setIQDialogBY(parseInt(inputTextTopBSQ));
+        setIQDialogBY(parseInt(parseFloat(inputTextTopBSQ) * 100) / 100);
         let say = 0;
         let cem = 0;
         for (let index = 0; index < 6; index++) {
@@ -150,13 +146,15 @@ const YearlyPriceHesabla = ({
             cem += inputTextBottomKSQ[index];
           }
         }
-        setIQDialogIY(parseInt((cem / say) * 0.4 + inputTextBottomBSQ * 0.6));
+        setIQDialogIY(
+          parseInt(
+            ((cem / say) * 0.4 + parseFloat(inputTextBottomBSQ) * 0.6) * 100,
+          ) / 100,
+        );
         setIQDialogIQ(
           parseInt(
-            (parseInt(inputTextTopBSQ) +
-              parseInt((cem / say) * 0.4 + inputTextBottomBSQ * 0.6)) /
-              2,
-          ),
+            ((parseFloat(inputTextTopBSQ) + parseFloat(IQDialogIY)) / 2) * 100,
+          ) / 100,
         );
 
         if (isKSQ === true && isBSQ === true) {
@@ -178,7 +176,7 @@ const YearlyPriceHesabla = ({
         });
         for (let index = 0; index < 6; index++) {
           if (inputTextTopKSQ[index] !== '') {
-            inputTextTopKSQ[index] = parseInt(inputTextTopKSQ[index]);
+            inputTextTopKSQ[index] = parseFloat(inputTextTopKSQ[index]);
           }
         }
         let say = 0;
@@ -189,7 +187,7 @@ const YearlyPriceHesabla = ({
             cem += inputTextTopKSQ[index];
           }
         }
-        setBYDialogBY(parseInt(cem / say));
+        setBYDialogBY(parseInt((cem / say) * 100) / 100);
         if (isKSQ) {
           setKSQ0DialogVisible(true);
         } else {
@@ -205,11 +203,11 @@ const YearlyPriceHesabla = ({
           ? (isBSQ = true)
           : (isBSQ = false);
         if (inputTextTopBSQ == '') {
-          inputTextTopBSQ = '0';
+          inputTextTopBSQ = 0;
         }
         for (let index = 0; index < 6; index++) {
           if (inputTextTopKSQ[index] !== '') {
-            inputTextTopKSQ[index] = parseInt(inputTextTopKSQ[index]);
+            inputTextTopKSQ[index] = parseFloat(inputTextTopKSQ[index]);
           }
         }
         let say = 0;
@@ -221,7 +219,9 @@ const YearlyPriceHesabla = ({
           }
         }
         setBYDialogBY(
-          parseInt((cem / say) * 0.4 + parseInt(inputTextTopBSQ) * 0.6),
+          parseInt(
+            ((cem / say) * 0.4 + parseFloat(inputTextTopBSQ) * 0.6) * 100,
+          ) / 100,
         );
 
         if (isKSQ === true && isBSQ === true) {
@@ -476,7 +476,7 @@ const YearlyPriceHesabla = ({
                 Birinci Yarımil:
               </Text>
               <Text style={{fontSize: 25, lineHeight: 30, color: colors.black}}>
-                {BYDialogBY + '/' + Price(parseInt(BYDialogBY))}
+                {BYDialogBY + '/' + Price(BYDialogBY)}
               </Text>
             </View>
             <View
@@ -543,7 +543,7 @@ const YearlyPriceHesabla = ({
                     lineHeight: 30,
                     color: colors.black,
                   }}>
-                  {IQDialogBY + '/' + Price(parseInt(IQDialogBY))}
+                  {IQDialogBY + '/' + Price(IQDialogBY)}
                 </Text>
               </View>
             </View>
@@ -558,7 +558,7 @@ const YearlyPriceHesabla = ({
                     lineHeight: 30,
                     color: colors.black,
                   }}>
-                  {IQDialogIY + '/' + Price(parseInt(IQDialogIY))}
+                  {IQDialogIY + '/' + Price(IQDialogIY)}
                 </Text>
               </View>
             </View>
@@ -573,7 +573,7 @@ const YearlyPriceHesabla = ({
                   color: colors.black,
                   justifyContent: 'flex-end',
                 }}>
-                {IQDialogIQ + '/' + Price(parseInt(IQDialogIQ))}
+                {IQDialogIQ + '/' + Price(IQDialogIQ)}
               </Text>
             </View>
             <View
