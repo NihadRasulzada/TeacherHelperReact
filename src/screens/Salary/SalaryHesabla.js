@@ -51,6 +51,7 @@ const SalaryHesabla = () => {
     } else {
       SRtxt = 0;
     }
+    console.log(SRtxt);
 
     if (Data.switchValueH == 1) {
       H1txt = 90;
@@ -76,7 +77,7 @@ const SalaryHesabla = () => {
         s1 = (Ali.stavka[0] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Ali.stavka[0] / 18) * parseInt(Data.astxt);
         s3 = (Ali.stavka[0] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -84,7 +85,7 @@ const SalaryHesabla = () => {
         s1 = (Ali.stavka[1] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Ali.stavka[1] / 18) * parseInt(Data.astxt);
         s3 = (Ali.stavka[1] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -92,7 +93,7 @@ const SalaryHesabla = () => {
         s1 = (Ali.stavka[2] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Ali.stavka[2] / 18) * parseInt(Data.astxt);
         s3 = (Ali.stavka[2] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -100,7 +101,7 @@ const SalaryHesabla = () => {
         s1 = (Ali.stavka[3] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Ali.stavka[3] / 18) * parseInt(Data.astxt);
         s3 = (Ali.stavka[3] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -108,7 +109,7 @@ const SalaryHesabla = () => {
         s1 = (Ali.stavka[4] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Ali.stavka[4] / 18) * parseInt(Data.astxt);
         s3 = (Ali.stavka[4] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -118,7 +119,7 @@ const SalaryHesabla = () => {
         s1 = (Orta.stavka[0] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Orta.stavka[0] / 18) * parseInt(Data.astxt);
         s3 = (Orta.stavka[0] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -126,7 +127,7 @@ const SalaryHesabla = () => {
         s1 = (Orta.stavka[1] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Orta.stavka[1] / 18) * parseInt(Data.astxt);
         s3 = (Orta.stavka[1] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -134,7 +135,7 @@ const SalaryHesabla = () => {
         s1 = (Orta.stavka[2] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Orta.stavka[2] / 18) * parseInt(Data.astxt);
         s3 = (Orta.stavka[2] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -142,7 +143,7 @@ const SalaryHesabla = () => {
         s1 = (Orta.stavka[3] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Orta.stavka[3] / 18) * parseInt(Data.astxt);
         s3 = (Orta.stavka[3] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }
@@ -150,7 +151,7 @@ const SalaryHesabla = () => {
         s1 = (Orta.stavka[4] / 18) * parseInt(Data.lstxt) * 1.15;
         s2 = (Orta.stavka[4] / 18) * parseInt(Data.astxt);
         s3 = (Orta.stavka[4] / 76.2) * parseInt(Data.estxt);
-        s = s2 + s1 + s3;
+        s = s2 + s1 + s3 + SRtxt;
         if (Data.switchValueS == true) {
           s = s * sbart;
         }

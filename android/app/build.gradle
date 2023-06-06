@@ -98,8 +98,8 @@ android {
         applicationId "com.trigointegro.teacherhelp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 16
-        versionName "2.0.2"
+        versionCode 19
+        versionName "2.1.1"
     }
 
     splits {
