@@ -38,8 +38,8 @@ const SalaryHesabla = () => {
     setHMtxt(parseInt(s + H1txt));
     setAMtxt(parseInt(t + H1txt));
     setGVtxt(parseInt(h));
-    setHtxt(parseInt(s * 0.03));
-    setDSMFtxt(parseInt(s * 0.02));
+    setHtxt(parseInt(s * 0.02));
+    setDSMFtxt(parseInt(s * 0.03));
     setTStxt(parseInt(s * 0.02));
     setISGtxt(parseInt(s * 0.005));
     setCTtxt(parseInt(s - t));
