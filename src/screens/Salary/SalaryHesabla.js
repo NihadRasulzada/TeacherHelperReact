@@ -58,7 +58,7 @@ const SalaryHesabla = () => {
       H2txt = 0;
     } else if (Data.switchValueH == 2) {
       H2txt = 100;
-      H1txt = 0;
+      H1txt = 90;
     } else {
       H1txt = 0;
       H2txt = 0;
