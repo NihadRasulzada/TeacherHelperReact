@@ -10,6 +10,7 @@ import {LogBox, View, Text} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import firestore from '@react-native-firebase/firestore';
 import {firebase} from './components/config';
+import QualityMastery from './screens/QualityMastery/QualityMastery';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,11 @@ const App = () => {
         <Stack.Screen
           name="TeacherProgram"
           component={TeacherProgram}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="QualityMastery"
+          component={QualityMastery}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

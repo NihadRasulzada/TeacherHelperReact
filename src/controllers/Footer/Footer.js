@@ -17,6 +17,9 @@ const HiddenOrVisibleFooterLayoutButton = props => {
   const onTouchedtoTeacherProgram = () => {
     navigation.navigate('TeacherProgram');
   };
+  const onTouchedtoQualityMastery = () => {
+    navigation.navigate('QualityMastery');
+  };
   if (props.Visibility) {
     return (
       <View
@@ -70,6 +73,29 @@ const HiddenOrVisibleFooterLayoutButton = props => {
             color={colors.orange}
             onPress={onTouchedtoYearlyPrice}
             name="İllik qiymət"
+          />
+        </View>
+        <View
+          style={{
+            width: '60%',
+            height: '15%',
+          }}>
+          <Button
+            width={'100%'}
+            height={'100%'}
+            borderWidth={5}
+            borderColor={colors.orange}
+            borderTopLeftRadius={25}
+            borderTopRightRadius={25}
+            borderBottomLeftRadius={25}
+            borderBottomRightRadius={25}
+            backgroundColor={colors.white}
+            fontWeight={400}
+            fontSize={24}
+            lineHeight={24}
+            color={colors.orange}
+            onPress={onTouchedtoQualityMastery}
+            name="Keyfiyyət Faizi"
           />
         </View>
       </View>
